@@ -3,10 +3,13 @@
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container d-flex justify-content-center">
     <div class="row">
         <div class="col">
-            <h1 class="text-center">Hallo Welt!</h1>
+            <img src="http://via.placeholder.com/350x350">
+        </div>
+        <div class="col">
+            <img src="http://via.placeholder.com/350x350">
         </div>
     </div>
 </div>
