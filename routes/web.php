@@ -9,3 +9,7 @@
 Route::get('/', function () {
     return view('pages.home');
 });
+
+/*Route::get('/release', function () {
+    
+})*/
