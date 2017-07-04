@@ -6,10 +6,10 @@
 <div class="container d-flex justify-content-center">
     <div class="row">
         <div class="col">
-            <img src="http://via.placeholder.com/350x350">
+            
         </div>
         <div class="col">
-            <img src="http://via.placeholder.com/350x350">
+            @yield('')
         </div>
     </div>
 </div>
