@@ -9,7 +9,7 @@
             
         </div>
         <div class="col">
-            @yield('')
+            {{ URL }}
         </div>
     </div>
 </div>
