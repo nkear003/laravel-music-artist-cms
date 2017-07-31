@@ -16,3 +16,9 @@ img {
     max-width:100%;
 }
 
+/* Navbar
+---------------------------------------------*/
+
+.collapse {
+    display: none !important; /* Center align that will still collapse */
+}

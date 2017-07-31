@@ -45,7 +45,7 @@ class ReleasesController extends Controller
      */
     public function show($id)
     {
-        return view('single');
+        return view('one');
     }
 
     /**
