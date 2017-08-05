@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use Session;
 
 class PostsController extends Controller
 {
@@ -23,7 +25,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -34,7 +36,29 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // javascript validate the data using Parsley
+        
+        $this->validate($request, array(
+            'title' => 'required|max:255',
+            'body' => 'required'
+        ));
+        
+        // store in database
+        
+        $post = new Post;
+        
+        $post->title = $request->title;
+        $post->body = $request->body;
+        
+        $post->save();
+        
+        // success message
+        
+        Session::flash('success', 'Your blog post was successfully created!');
+        
+        // redirect
+        
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
@@ -45,7 +69,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+//        $post = Post::find()
+        
+        return view('posts.show');
     }
 
     /**

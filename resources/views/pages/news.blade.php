@@ -1,14 +1,21 @@
-@extends('layouts.main')
+@extends('main')
 
+@section('title', ' | News')
 
 @section('content')
 
 <div class="row">
     <div class="col">
-        <h1>Column 1</h1>
+        {{ Html::image('images/ss.jpg') }}
+        <h6>Title Goes Here</h6>
     </div>
     <div class="col">
-        <h1>Column 2</h1>
+        <h3>Title Goes Here</h3>
+        {{ Html::image('images/dr.png') }}
+    </div>
+    <div class="col">
+        <h3>Title Goes Here</h3>
+        {{ Html::image('images/2011.png') }}
     </div>
 </div>
 

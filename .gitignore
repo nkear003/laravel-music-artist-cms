@@ -53,3 +53,6 @@ public/images/
 Homestead.json
 Homestead.yaml
 .env
+resources/views/layouts/.DS_Store
+resources/views/.DS_Store
+resources/.DS_Store

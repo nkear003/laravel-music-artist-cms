@@ -5,7 +5,7 @@ body {
 }
 
 .row {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
 }
 
 
@@ -21,4 +21,22 @@ img {
 
 .collapse {
     display: none !important; /* Center align that will still collapse */
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+/* Footer
+---------------------------------------------*/
+
+.footer {
+    margin-top: 20px;
+}
+
+/* buttons
+---------------------------------------------*/
+
+.btn {
+    margin-top: 20px;
 }

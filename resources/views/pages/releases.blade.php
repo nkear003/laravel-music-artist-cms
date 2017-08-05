@@ -1,3 +1,3 @@
-@extends('layouts.main')
+@extends('main')
 
 @yield('content') 
