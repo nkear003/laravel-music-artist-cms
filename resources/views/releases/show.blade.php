@@ -1,21 +1,21 @@
 @extends('main')
 
-@section('title') | {{$post->title}} @endsection
+@section('title') | {{$release->title}} @endsection
 
 
 @section('content')
 
 <div class="row title">
-    <div class="col"><h1>{{$post->title}}</h1></div>
+    <div class="col"><h1>{{$release->title}}</h1></div>
 </div>
 
 <div class="row main-content">
     <div class="col">        
-        <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->image }}">
+        <img src="{{ asset('storage/images/' . $release->image) }}" alt="{{ $release->image }}">
         <hr>
         <ul>
-            <li><strong>Released: </strong></li>
-            <li><strong>Genre: </strong></li>
+            <li><strong>Released: {{ $release->released }}</strong></li>
+            <li><strong>Genre: {{ $release->genre }} </strong></li>
             <li><strong>Mastering: </strong></li>
         </ul>
         <hr>
@@ -42,6 +42,6 @@
     </div>
 
 
-<p class="lead"> {{ $post->body }} </p>
+<p class="lead"> {{ $release->description }} </p>
 
 @endsection

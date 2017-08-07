@@ -13,15 +13,19 @@
 <div class="offset-2 col-8">
     
     <h1>Create New Post</h1>
+    
     <hr>
 
-    {!! Form::open(['route' => 'posts.store', 'data-parsley-validate' => '']) !!}
+    {!! Form::open(['route' => 'posts.store', 'files' => 'true', 'data-parsley-validate' => '']) !!}
 
         {{ Form::label('title', 'Title:') }}
         {{ Form::text('title', null, array('class' => 'form-control ', 'required' => '', 'maxlength' => '256') ) }}
         
         {{ Form::label('body', 'Post Body:') }}
-        {{ Form::textarea('body', null, array('class' => 'form-control', 'required' => '' ) ) }}
+        {{ Form::textarea('body', null, array('class' => 'form-control') ) }}
+        
+        {{ Form::label('image', 'Images: ') }}
+        {{ Form::file('image', array('class' => 'input-group')) }}
         
         {{ Form::submit('Create Post', array('class' => 'btn btn-primary btn-lg btn-block')) }}
 

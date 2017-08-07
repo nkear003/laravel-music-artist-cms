@@ -3,6 +3,6 @@
 
 @section('content')
 
-hi
+This is the home page
 
 @stop

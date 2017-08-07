@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Release;
 use Session;
 use Illuminate\Support\Facades\Storage;
 
-class PostsController extends Controller
+class ReleasesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('releases.create');
     }
 
     /**
@@ -37,44 +37,45 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        // javascript validate the data using Parsley
-        
+        // php validate the data
+
         $this->validate($request, array(
-            'title' => 'required|max:255'   
+            'title' => 'required|max:255|unique:releases'   
         ));
-        
-        // store Post in database
-        
-        $post = new Post;
-        
+
+        // store Release in database
+
+        $release = new Release;
+
         if (!empty($request->image)) {
-        
+
             $image = $request->image;
             $image->origName = $image->getClientOriginalName();    
             $image->title = $image->origName;
-            
-            $post->image = $image->title;
-            
-            Storage::disk('public')->putFileAs('images', $image, $image->title);   
-            
-        } 
-        
 
-        
-        $post->title = $request->title;
-        $post->slug = str_slug($post->title, '-');
-        $post->body = $request->body;
-        
-        $post->save();
-        
-        
+            $release->image = $image->title;
+
+            Storage::disk('public')->putFileAs('images', $image, $image->title);   
+
+        }         
+
+        $release->title = $request->title;
+        $release->slug = str_slug($release->title, '-');
+        $release->description = $request->description;
+        $release->released = $request->released;
+        $release->mastered_by = $request->mastered_by;
+        $release->genre = $request->genre;
+
+        $release->save();
+
+
         // success message
-        
+
         Session::flash('success', 'Your blog post was successfully created!');
-        
+
         // redirect
-        
-        return redirect()->route('posts.show', $post->slug);
+
+        return redirect()->route('releases.show', $release->slug);
     }
 
     /**
@@ -84,10 +85,9 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
-    {        
-        
-        $post = Post::where('slug', $slug)->firstOrFail();
-        return view('posts.show')->withPost($post);
+    {
+        $release = Release::where('slug', $slug)->first();
+        return view('releases.show')->withRelease($release);
     }
 
     /**
@@ -122,11 +122,5 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
-    }
-    
-    public function showArticle($slug)
-    {
-        $post = Post::where('slug', $slug)->firstOrFail();
-        return view('posts.show')->withPost($post);
     }
 }
