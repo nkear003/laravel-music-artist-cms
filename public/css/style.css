@@ -18,11 +18,11 @@ img {
 .post-img { max-height: 500px }
 
 .post { max-height: auto; max-width: 250px }
-.release { max-height: 400px; max-width: 400px }
+.featured { max-height: 600px; max-width: 600px }
 
 .grid-item {
-/*    float: left;*/
-    width: 250px;
+    float: left;
+    width: 500px;
     height: auto;
     
 }

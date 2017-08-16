@@ -23,6 +23,8 @@ class PostsController extends Controller
         // return a view and pass in the variable
         
         return view('posts.index')->withPosts($posts);
+        
+        
     }
 
     /**
@@ -43,43 +45,66 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        // javascript validate the data using Parsley
-        
+        // php validate the data
+
         $this->validate($request, array(
-            'title' => 'required|max:255'   
+            'title' => 'required|max:255|unique:posts,title'   
         ));
-        
+
         // store Post in database
-        
+
         $post = new Post;
-        
+
         if (!empty($request->image)) {
-        
+
             $image = $request->image;
             $image->origName = $image->getClientOriginalName();    
             $image->title = $image->origName;
-            
-            $post->image = $image->title;
-            
-            Storage::disk('public')->putFileAs('images', $image, $image->title);   
-            
-        } 
-        
 
+            $post->image = $image->title;
+
+            Storage::disk('public')->putFileAs('images', $image, $image->title);   
+
+        }
+      
+        if (!empty($request->mp3)) {
+
+            $mp3 = $request->mp3;
+            $mp3->origName = $mp3->getClientOriginalName();
+            $mp3->title = $mp3->origName;
+
+            $post->mp3 = $mp3->title;
+
+            Storage::disk('public')->putFileAs('zips', $mp3, $mp3->title);
+
+        }
         
+        if (!empty($request->wav)) {
+
+            $wav = $request->wav;
+            $wav->origName = $wav->getClientOriginalName();
+            $wav->title = $wav->origName;
+            $post->wav = $wav->title;
+            Storage::disk('public')->putFileAs('zips', $wav, $wav->title);
+            
+        }
+            
         $post->title = $request->title;
         $post->slug = str_slug($post->title, '-');
-        $post->body = $request->body;
-        
+        $post->description = $request->description;
+        $post->released = $request->released;
+        $post->mastered_by = $request->mastered_by;
+        $post->genre = $request->genre;
+        $post->soundcloud_id = $request->soundcloud_id;
+
         $post->save();
-        
-        
+
         // success message
-        
-        Session::flash('success', 'Your blog post was successfully created!');
-        
+
+        Session::flash('success', 'The release was successfully created.');
+
         // redirect
-        
+
         return redirect()->route('posts.show', $post->slug);
     }
 
@@ -90,8 +115,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
-    {        
-        
+    {
         $post = Post::where('slug', $slug)->first();
         return view('posts.show')->withPost($post);
     }
@@ -102,9 +126,15 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        // find the release in the database and save as a var
+        
+        $post = Post::where('slug', $slug)->first();
+            
+        // return the view and pass in the var just created
+            
+        return view('posts.edit')->withPost($post);
     }
 
     /**
@@ -116,7 +146,70 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate the form
+        
+        $this->validate($request, array(
+            'title' => 'required|max:255'   
+        ));
+        
+        // save the data to the database
+        
+        $post = Post::find($id);
+
+        if (!empty($request->image)) {
+
+            $image = $request->image;
+            $image->origName = $image->getClientOriginalName();    
+            $image->title = $image->origName;
+
+            $post->image = $image->title;
+
+            Storage::disk('public')->putFileAs('images', $image, $image->title);
+
+        }
+        
+        if (!empty($request->wav)) {
+
+            $wav = $request->wav;
+            $wav->origName = $wav->getClientOriginalName();
+            $wav->title = $wav->origName;
+        
+            $post->wav = $wav->title;
+            
+            Storage::disk('public')->putFileAs('zips', $wav, $wav->title);
+            
+        }
+        
+        if (!empty($request->mp3)) {
+
+            $mp3 = $request->mp3;
+            $mp3->origName = $mp3->getClientOriginalName();
+            $mp3->title = $mp3->origName;
+
+            $post->mp3 = $mp3->title;
+
+            Storage::disk('public')->putFileAs('zips', $mp3, $mp3->title);
+
+        }
+        
+
+        $post->title = $request->input('title');
+        $post->slug = str_slug($post->title, '-');
+        $post->description = $request->input('description');
+        $post->released = $request->input('released');
+        $post->mastered_by = $request->input('mastered_by');
+        $post->genre = $request->input('genre');
+        $post->soundcloud_id = $request->input('soundcloud_id');
+
+        $post->save();
+        
+        // set flash data with success message
+        
+        Session::flash('success', 'The release was successfully updated');
+        
+        // redirect with flash data with success message
+        
+        return redirect()->route('posts.show', $post->slug);
     }
 
     /**
@@ -127,12 +220,21 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-    
-    public function showArticle($slug)
-    {
-        $post = Post::where('slug', $slug)->firstOrFail();
-        return view('posts.show')->withPost($post);
+        
+        // find the release
+//        $post = Post::where('slug', $slug);
+//        Post::where('slug', $slug)->delete();
+        $post = Post::find($id);
+        
+        // delete it
+        $post->delete();
+//        Post::destroy($id);
+        
+        // Success flash method
+        Session::flash('success', 'The release was successfully deleted');
+        
+        // redirect
+        return redirect()->route('posts.index');
+        
     }
 }

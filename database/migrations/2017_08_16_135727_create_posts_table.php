@@ -16,9 +16,15 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
-            $table->string('image');
-            $table->text('body');
+            $table->string('image')->nullable();
+            $table->text('description');
+            $table->date('released');
+            $table->string('genre');
+            $table->string('soundcloud_id');
+            $table->string('mastered_by')->nullable();
             $table->string('slug')->unique();
+            $table->string('wav')->nullable();
+            $table->string('mp3')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +36,8 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::table('posts', function (Blueprint $table) {
+            Schema::dropIfExists('posts');
+        });
     }
 }

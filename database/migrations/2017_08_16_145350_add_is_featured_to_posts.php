@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPlaylistToPosts extends Migration
+class AddIsFeaturedToPosts extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddPlaylistToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('playlist')->nullable();
+            $table->boolean('is_featured')->default(0);
         });
     }
 
@@ -26,7 +26,7 @@ class AddPlaylistToPosts extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('playlist');
+            $table->dropColumn('is_featured');
         });
     }
 }

@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', ' | Posts')
+@section('title', ' | posts')
 
 @section('content')
 
@@ -11,7 +11,7 @@
     </div>
     <div class="col d-flex justify-content-end">
         <a href="{{ route('posts.create') }}">
-            <button href="{{ route('posts.create') }}" class="btn btn-primary">New Post</button>
+            <button class="btn btn-primary">New Post</button>
         </a>
     </div>
 </div>
@@ -24,43 +24,49 @@
                 <th>#</th>
                 <th>Title</th>
                 <th>Image</th>
-                <th>Body</th>
+                <th>Description</th>
+                <th>Released</th>
                 <th>Slug</th>
                 <th>Created</th>
-                <th>Playlist ID</th>
+                <th></th>
             </thead>
+            
             <tbody>
                 @foreach($posts as $post)
-                <tr>
-                    <th scope="row">{{$release->id}}</th>
-                    <td><a href="{{route('releases.show', $release->slug)}}">{{$release->title}}</a></td>
-                    <td><img src="{{asset('storage/images/' . $release->image)}}" class="img-thumbnail img-fluid thumb"></td>
-                    <td>
-                        {{substr($release->description, 0, 50)}}
-                        {{ (strlen($release->description) > 50 ? "..." : "") }}
-                    </td>
-                    <td>{{date('M j, Y', strtotime($release->released))}}</td>
-                    <td>{{$release->genre}}</td>
-                    <td>{{$release->slug}}</td>
-                    <td>{{date('M j, Y', strtotime($release->created_at))}}</td>
-                    <td>
-                        <div class="btn-group-vertical btn-group-sm">
-                            <a href="{{route('releases.show', $release->slug)}}" class="btn btn-primary">View</a>
-                            <a href="{{route('releases.edit', $release->slug)}}" class="btn btn-success">Edit</a>
-
-                            {!! Form::open(['route' => ['releases.destroy', $release->id], 'method' 
-                            => 'DELETE' ]) !!}
-
-                            {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger btn-block']) !!}
-
-                            {!! Form::close() !!}
-                        </div>
-                    </td>
-                </tr>
+                
+                    <tr>
+                        <th scope="row">{{$post->id}}</th>
+                        <td><a href="{{route('posts.show', $post->slug)}}">{{$post->title}}</a></td>
+                        <td><img src="{{asset('storage/images/' . $post->image)}}" class="img-thumbnail img-fluid thumb"></td>
+                        <td>
+                            {{substr($post->description, 0, 50)}}
+                            {{ (strlen($post->description) > 50 ? "..." : "") }}
+                        </td>
+                        <td>{{date('M j, Y', strtotime($post->released))}}</td>
+                        <td>{{$post->slug}}</td>
+                        <td>{{date('M j, Y', strtotime($post->created_at))}}</td>
+                        <td>
+                            <div class="btn-group-vertical btn-group-sm">
+                                <a href="{{route('posts.show', $post->slug)}}" class="btn btn-primary">View</a>
+                                <a href="{{route('posts.edit', $post->slug)}}" class="btn btn-success">Edit</a>
+                                
+                                {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' 
+                                => 'DELETE' ]) !!}
+                                    
+                                {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger btn-block']) !!}
+                                    
+                                {!! Form::close() !!}
+                            </div>
+                        </td>
+                    </tr>
+                
                 @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+            {!! $posts->links() !!}
+        </div>
     </div>
-</div>
+</div> <!--end posts <row></row>-->
 
 @endsection

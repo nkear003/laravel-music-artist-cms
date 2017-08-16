@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Release;
 use App\Post;
 
 class PagesController extends Controller
@@ -23,16 +22,16 @@ class PagesController extends Controller
     }
     
     public function news() {
-        $releases = Release::orderBy('created_at', 'desc')/*->limit(3)*/->get();
         $posts = Post::orderBy('id', 'desc')/*->limit(3)*/->get();
-        return view('pages.news')->withReleases($releases)->withPosts($posts);
+        return view('pages.news')->withPosts($posts)->withPosts($posts);
     }
     
     public function releases() 
     {
-        $releases = Release::orderBy('id', 'desc');
+//        $posts = Post::orderBy('created_at', 'desc');
+        $posts = Post::all();
         
-        return view('pages.releases')->withReleases($releases);
+        return view('pages.releases')->withPosts($posts);
     }
     
     public function home()

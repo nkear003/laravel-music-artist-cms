@@ -10,6 +10,9 @@ $(document).ready(function() {
       // options...
       itemSelector: '.grid-item',
       columnWidth: 200
+//      percentPosition: true,
+//      columnWidth: '.col',
+//      percentPosition: true
     });
     
 });

@@ -7,11 +7,16 @@
 <div class="row">
 
     <div class="grid col">
-        @foreach($releases as $release)
-
-            <a href="{{route('releases.show', $release->slug)}}">
-                <img class="img-fluid release grid-item" src="{{asset('/storage/images/' . $release->image)}}" alt="">
+        @foreach($posts as $post)
+            @if($post->is_featured)
+            <a href="{{route('posts.show', $post->slug)}}">
+                <img class="img-fluid featured grid-item img-thumbnail" src="{{asset('/storage/images/' . $post->image)}}" alt="">
             </a>
+            @elseif(!$post->is_featured)
+            <a href="{{route('posts.show', $post->slug)}}">
+                <img class="img-fluid post img-thumbnail grid-item" src="{{asset('/storage/images/' . $post->image)}}" alt="">
+            </a>
+            @endif
             
         @endforeach
     </div>
