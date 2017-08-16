@@ -56,3 +56,8 @@ Homestead.yaml
 resources/views/layouts/.DS_Store
 resources/views/.DS_Store
 resources/.DS_Store
+
+# Min Files #
+#############
+
+*.min.*

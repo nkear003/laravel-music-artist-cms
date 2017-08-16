@@ -7,14 +7,19 @@
        
         @include('partials._navbar')
         
-        <div class="container-fluid"> <!-- Content -->
+        <!-- Content -->
+        <div class="container-fluid">
            
-            <div class="offset-1 col-10">
+            <div class="row">
+                
+                <div class="offset-1 col-10">
 
-               @include('partials._messages')
-               
-               @yield('content')
-           
+                   @include('partials._messages')
+
+                   @yield('content')
+
+                </div>
+                
             </div>
             
         </div>

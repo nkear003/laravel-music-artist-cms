@@ -20,6 +20,7 @@ class CreateReleasesTable extends Migration
             $table->text('description');
             $table->date('released');
             $table->string('genre');
+            $table->string('soundcloud_id');
             $table->string('mastered_by')->nullable();
             $table->string('slug')->unique();
             $table->timestamps();

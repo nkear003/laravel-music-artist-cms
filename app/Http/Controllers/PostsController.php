@@ -16,7 +16,13 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        // create a variable and store all blog posts in it from db
+        
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        
+        // return a view and pass in the variable
+        
+        return view('posts.index')->withPosts($posts);
     }
 
     /**
@@ -86,7 +92,7 @@ class PostsController extends Controller
     public function show($slug)
     {        
         
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::where('slug', $slug)->first();
         return view('posts.show')->withPost($post);
     }
 

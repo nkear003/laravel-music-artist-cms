@@ -27,7 +27,7 @@
         {{ Form::label('image', 'Images: ') }}
         {{ Form::file('image', array('class' => 'input-group')) }}
         
-        {{ Form::submit('Create Post', array('class' => 'btn btn-primary btn-lg btn-block')) }}
+        {{ Form::submit('Create Post', array('class' => 'btn btn-primary btn-lg btn-block mt-3')) }}
 
     {!! Form::close() !!}
     

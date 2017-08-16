@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Release;
+use App\Post;
 
 class PagesController extends Controller
 {
@@ -11,29 +13,7 @@ class PagesController extends Controller
     }
     
     public function about() {
-        $first = 'Nick';
-        $last = 'Kearney';
-        $fullname = $first . " " . $last;
-        $email = 'nkearney757@gmail.com';
-        
-        /*class Person {
-            
-            new array(
-            'first'
-            );
-            
-            $first;
-            $last;
-            $fullname = $first . $last;
-            $email;
-        }*/
-        
-        $data = (object) array();
-        $data->name = 'Nick';  
-        $data->email = $email;
-        $data->fullname = $fullname;
-        
-        return view ('pages.about')->withData($data);
+        return view('pages.about');
     }
     
     public function contact() {
@@ -43,6 +23,20 @@ class PagesController extends Controller
     }
     
     public function news() {
-        return view('pages.news');
+        $releases = Release::orderBy('created_at', 'desc')/*->limit(3)*/->get();
+        $posts = Post::orderBy('id', 'desc')/*->limit(3)*/->get();
+        return view('pages.news')->withReleases($releases)->withPosts($posts);
+    }
+    
+    public function releases() 
+    {
+        $releases = Release::orderBy('id', 'desc');
+        
+        return view('pages.releases')->withReleases($releases);
+    }
+    
+    public function home()
+    {
+        return view('pages.home');
     }
 }

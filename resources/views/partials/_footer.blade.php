@@ -1,3 +1,4 @@
+    <!-- Footer -->
     <div class="footer container-fluid d-flex justify-content-center">
         <div class="row">
             <div>
@@ -6,7 +7,7 @@
                 </col>
             </div>
         </div>
-    </div> <!-- Footer -->
+    </div>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>

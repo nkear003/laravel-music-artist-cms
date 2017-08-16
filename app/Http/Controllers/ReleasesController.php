@@ -16,7 +16,16 @@ class ReleasesController extends Controller
      */
     public function index()
     {
-        //
+        /*// create a variable and store all blog posts in it from db
+        
+        $releases = Release::orderBy('id', 'desc')->paginate(10);
+        
+        // return a view and pass in the variable
+        
+        return view('releases.index')->withReleases($releases);*/
+        
+        Route::get
+        
     }
 
     /**
@@ -40,7 +49,7 @@ class ReleasesController extends Controller
         // php validate the data
 
         $this->validate($request, array(
-            'title' => 'required|max:255|unique:releases'   
+            'title' => 'required|max:255|unique:releases,title'   
         ));
 
         // store Release in database
@@ -57,21 +66,43 @@ class ReleasesController extends Controller
 
             Storage::disk('public')->putFileAs('images', $image, $image->title);   
 
-        }         
+        }
+      
+        if (!empty($request->mp3)) {
 
+            $mp3 = $request->mp3;
+            $mp3->origName = $mp3->getClientOriginalName();
+            $mp3->title = $mp3->origName;
+
+            $release->mp3 = $mp3->title;
+
+            Storage::disk('public')->putFileAs('zips', $mp3, $mp3->title);
+
+        }
+        
+        if (!empty($request->wav)) {
+
+            $wav = $request->wav;
+            $wav->origName = $wav->getClientOriginalName();
+            $wav->title = $wav->origName;
+            $release->wav = $wav->title;
+            Storage::disk('public')->putFileAs('zips', $wav, $wav->title);
+            
+        }
+            
         $release->title = $request->title;
         $release->slug = str_slug($release->title, '-');
         $release->description = $request->description;
         $release->released = $request->released;
         $release->mastered_by = $request->mastered_by;
         $release->genre = $request->genre;
+        $release->soundcloud_id = $request->soundcloud_id;
 
         $release->save();
 
-
         // success message
 
-        Session::flash('success', 'Your blog post was successfully created!');
+        Session::flash('success', 'The release was successfully created.');
 
         // redirect
 
@@ -96,9 +127,15 @@ class ReleasesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        // find the release in the database and save as a var
+        
+        $release = Release::where('slug', $slug)->first();
+            
+        // return the view and pass in the var just created
+            
+        return view('releases.edit')->withRelease($release);
     }
 
     /**
@@ -110,7 +147,70 @@ class ReleasesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate the form
+        
+        $this->validate($request, array(
+            'title' => 'required|max:255'   
+        ));
+        
+        // save the data to the database
+        
+        $release = Release::find($id);
+
+        if (!empty($request->image)) {
+
+            $image = $request->image;
+            $image->origName = $image->getClientOriginalName();    
+            $image->title = $image->origName;
+
+            $release->image = $image->title;
+
+            Storage::disk('public')->putFileAs('images', $image, $image->title);
+
+        }
+        
+        if (!empty($request->wav)) {
+
+            $wav = $request->wav;
+            $wav->origName = $wav->getClientOriginalName();
+            $wav->title = $wav->origName;
+        
+            $release->wav = $wav->title;
+            
+            Storage::disk('public')->putFileAs('zips', $wav, $wav->title);
+            
+        }
+        
+        if (!empty($request->mp3)) {
+
+            $mp3 = $request->mp3;
+            $mp3->origName = $mp3->getClientOriginalName();
+            $mp3->title = $mp3->origName;
+
+            $release->mp3 = $mp3->title;
+
+            Storage::disk('public')->putFileAs('zips', $mp3, $mp3->title);
+
+        }
+        
+
+        $release->title = $request->input('title');
+        $release->slug = str_slug($release->title, '-');
+        $release->description = $request->input('description');
+        $release->released = $request->input('released');
+        $release->mastered_by = $request->input('mastered_by');
+        $release->genre = $request->input('genre');
+        $release->soundcloud_id = $request->input('soundcloud_id');
+
+        $release->save();
+        
+        // set flash data with success message
+        
+        Session::flash('success', 'The release was successfully updated');
+        
+        // redirect with flash data with success message
+        
+        return redirect()->route('releases.show', $release->slug);
     }
 
     /**
@@ -121,6 +221,21 @@ class ReleasesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        // find the release
+//        $release = Release::where('slug', $slug);
+//        Release::where('slug', $slug)->delete();
+        $release = Release::find($id);
+        
+        // delete it
+        $release->delete();
+//        Release::destroy($id);
+        
+        // Success flash method
+        Session::flash('success', 'The release was successfully deleted');
+        
+        // redirect
+        return redirect()->route('releases.index');
+        
     }
 }
