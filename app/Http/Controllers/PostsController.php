@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Post;
 use Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+//use Intervention\Image\ImageManagerStatic as Image;
+use Image;
 
 class PostsController extends Controller
 {
@@ -54,19 +57,39 @@ class PostsController extends Controller
         // store Post in database
 
         $post = new Post;
-
-        if (!empty($request->image)) {
-
-            $image = $request->image;
-            $image->origName = $image->getClientOriginalName();    
-            $image->title = $image->origName;
-
-            $post->image = $image->title;
-
-            Storage::disk('public')->putFileAs('images', $image, $image->title);   
-
+        
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('/storage/images/' . $filename);
+//            $path;
+            
+            Image::make($image)->resize(500)->save($location);
+//            Storage::disk('public')->putFileAs('images', $image, $filename);   
+            
+            $post->image = $filename;
         }
-      
+        
+        if ($request->hasFile('wav')) {
+            
+            $wav = $request->file('wav');
+            $filename = $wav->getOriginalClientName();
+            $location = 
+            
+            $post->wav = $filename;
+        }
+        
+                
+//        if (!empty($request->wav)) {
+//
+//            $wav = $request->wav;
+//            $wav->origName = $wav->getClientOriginalName();
+//            $wav->title = $wav->origName;
+//            $post->wav = $wav->title;
+//            Storage::disk('local')->putFileAs('zips', $wav, $wav->title);
+//            
+//        }
+     
         if (!empty($request->mp3)) {
 
             $mp3 = $request->mp3;
@@ -75,18 +98,8 @@ class PostsController extends Controller
 
             $post->mp3 = $mp3->title;
 
-            Storage::disk('public')->putFileAs('zips', $mp3, $mp3->title);
+            Storage::disk('local')->putFileAs('zips', $mp3, $mp3->title);
 
-        }
-        
-        if (!empty($request->wav)) {
-
-            $wav = $request->wav;
-            $wav->origName = $wav->getClientOriginalName();
-            $wav->title = $wav->origName;
-            $post->wav = $wav->title;
-            Storage::disk('public')->putFileAs('zips', $wav, $wav->title);
-            
         }
             
         $post->title = $request->title;

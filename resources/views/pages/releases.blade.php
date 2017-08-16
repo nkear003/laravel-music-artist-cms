@@ -26,11 +26,3 @@
 
 
 @endsection
-
-
-@section('scripts')
-
-<script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
-<script src="{{asset('js/script.min.js')}}"></script>
-
-@endsection
