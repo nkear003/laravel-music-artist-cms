@@ -43,13 +43,6 @@ nav {
     margin-bottom: 20px;
 }
 
-/* Footer
----------------------------------------------*/
-
-.footer {
-    margin-top: 20px;
-}
-
 /* other
 ---------------------------------------------*/
 
@@ -60,4 +53,8 @@ ul {
 
 .form-control {
     margin-bottom: .5rem;
+}
+
+.hide {
+    display: none;
 }

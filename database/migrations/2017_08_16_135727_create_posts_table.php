@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title')->unique();
             $table->string('image')->nullable();
+            $table->string('path_to_image')->nullable();
             $table->text('description');
             $table->date('released');
             $table->string('genre');

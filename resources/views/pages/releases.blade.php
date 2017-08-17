@@ -6,15 +6,15 @@
     
 <div class="row">
 
-    <div class="grid col">
+    <div class="col">
         @foreach($posts as $post)
             @if($post->is_featured)
             <a href="{{route('posts.show', $post->slug)}}">
-                <img class="img-fluid featured grid-item img-thumbnail" src="{{asset('/storage/images/' . $post->image)}}" alt="">
+                <img class="img-fluid img-thumbnail" src="{{asset('/storage/images/' . $post->image)}}" alt="">
             </a>
             @elseif(!$post->is_featured)
             <a href="{{route('posts.show', $post->slug)}}">
-                <img class="img-fluid post img-thumbnail grid-item" src="{{asset('/storage/images/' . $post->image)}}" alt="">
+                <img class="img-fluid img-thumbnail" src="{{asset('/storage/images/' . $post->image)}}" alt="">
             </a>
             @endif
             

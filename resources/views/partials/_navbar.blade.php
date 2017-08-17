@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-toggleable-md navbar-light">
+<nav class="navbar navbar-toggleable-md navbar-light hide" id="user_nav">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

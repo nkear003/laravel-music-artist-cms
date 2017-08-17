@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\File;
 
 class PagesController extends Controller
 {
@@ -19,6 +20,19 @@ class PagesController extends Controller
      
         
         
+    }
+    
+    public function files() {
+        $files = File::all();
+        return view('pages.files')->withFiles($files);
+    }
+    
+    public function admin() {
+        return view('pages.admin');
+    }
+    
+    public function posts() {
+        return view('pages.posts');
     }
     
     public function news() {

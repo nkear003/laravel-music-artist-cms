@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col d-flex justify-content-center">
-        <img src="{{asset('/storage/images/schlagen.png')}}" class="release" alt="">
+        <img src="" class="release" alt="">
     </div>
 </div>
 

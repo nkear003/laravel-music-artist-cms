@@ -1,5 +1,5 @@
     <!-- Footer -->
-    <div class="footer container-fluid d-flex justify-content-center">
+    <div class="footer container-fluid d-flex justify-content-center mt-5">
         <div class="row">
             <div>
                 <col>
