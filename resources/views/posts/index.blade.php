@@ -37,7 +37,7 @@
                     <tr>
                         <th scope="row">{{$post->id}}</th>
                         <td><a href="{{route('posts.show', $post->slug)}}">{{$post->title}}</a></td>
-                        <td><img src="{{asset('storage/images/' . $post->image)}}" class="img-thumbnail img-fluid thumb"></td>
+                        <td><img src="{{asset($post->path_to_image)}}" class="img-thumbnail img-fluid thumb"></td>
                         <td>
                             {{substr($post->description, 0, 50)}}
                             {{ (strlen($post->description) > 50 ? "..." : "") }}

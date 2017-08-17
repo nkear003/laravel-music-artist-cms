@@ -32,7 +32,8 @@ class PagesController extends Controller
     }
     
     public function posts() {
-        return view('pages.posts');
+        $post = Post::find(4);
+        return view('pages.posts')->withPost($post);
     }
     
     public function news() {

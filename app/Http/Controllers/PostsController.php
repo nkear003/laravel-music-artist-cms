@@ -7,7 +7,6 @@ use App\Post;
 use Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
-//use Intervention\Image\ImageManagerStatic as Image;
 use Image;
 
 class PostsController extends Controller
@@ -59,16 +58,30 @@ class PostsController extends Controller
         $post = new Post;
         
         if ($request->hasFile('image')) {
+            
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $location = public_path('/storage/images/' . $filename);
-//            $path;
             
-            Image::make($image)->resize(500)->save($location);
-//            Storage::disk('public')->putFileAs('images', $image, $filename);   
+            if ($request->wm) {
+                $location = public_path('storage/images/wm/' . $filename);
+                $path = 'storage/images/wm/' . $filename;
+            } else if($request->poster) {
+                $location = public_path('storage/images/posters/' . $filename);
+                $path = 'storage/images/posters/' . $filename;
+            } else {
+                $location = public_path('storage/images/' . $filename);
+                $path = 'storage/images/' . $filename;
+            }
             
+            Image::make($image)->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location);
+            
+            $post->path_to_image = $path;
             $post->image = $filename;
+            
         }
+        
         
         if ($request->hasFile('wav')) {
             

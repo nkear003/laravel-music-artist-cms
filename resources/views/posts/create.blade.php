@@ -55,7 +55,11 @@
 
             {{ Form::label('image', 'Image: ') }}
             {{ Form::file('image', array('class' => 'input-group form-control-file')) }}
-            <small id="fileHelp" class="form-text text-muted">Upload your sick artwork.</small>
+            
+            {{ Form::checkbox('wm') }} WM <br>
+            {{ Form::checkbox('poster') }} Poster
+            <small id="fileHelp" class="form-text text-muted">Upload image.</small>
+            
             
             {{ Form::label('wav', 'WAV zip: ') }}
             {{ Form::file('wav', array('class' => 'input-group form-control-file release')) }}
