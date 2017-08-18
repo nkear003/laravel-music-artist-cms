@@ -6,23 +6,18 @@
     
 <div class="row">
 
+
+    @for($i = 0; $i < count($releases); $i++)
     <div class="col">
-        @foreach($posts as $post)
-            @if($post->is_featured)
-            <a href="{{route('posts.show', $post->slug)}}">
-                <img class="img-fluid img-thumbnail" src="{{asset('/storage/images/' . $post->image)}}" alt="">
-            </a>
-            @elseif(!$post->is_featured)
-            <a href="{{route('posts.show', $post->slug)}}">
-                <img class="img-fluid img-thumbnail" src="{{asset('/storage/images/' . $post->image)}}" alt="">
-            </a>
-            @endif
-            
-        @endforeach
-    </div>
-    
+        <a href="{{route('posts.show', $releases[$i]->slug)}}">
+            <img class="img-fluid img-thumbnail" src="{{$releases[$i]->path_to_image}}" alt="">
+        </a>
+    </div>    
+    @if( $i > 0 && ($i == 1 || $i % 3 == 0))
+</div>
+<div class="row mt-3">
+    @endif
+    @endfor       
 </div>
     
-
-
 @endsection

@@ -43,10 +43,11 @@ class PagesController extends Controller
     
     public function releases() 
     {
-//        $posts = Post::orderBy('created_at', 'desc');
-        $posts = Post::all();
+        $releases = Post::where('category_id', 1)->limit(10)->get();
+//        $releases = Post::all();
+//        $releases = Post::find(1);
         
-        return view('pages.releases')->withPosts($posts);
+        return view('pages.releases')->withReleases($releases);
     }
     
     public function home()

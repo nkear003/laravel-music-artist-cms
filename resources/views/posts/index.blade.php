@@ -27,6 +27,7 @@
                 <th>Description</th>
                 <th>Released</th>
                 <th>Slug</th>
+                <th>Category</th>
                 <th>Created</th>
                 <th></th>
             </thead>
@@ -44,6 +45,7 @@
                         </td>
                         <td>{{date('M j, Y', strtotime($post->released))}}</td>
                         <td>{{$post->slug}}</td>
+                        <td>{{$post->category->name}}</td>
                         <td>{{date('M j, Y', strtotime($post->created_at))}}</td>
                         <td>
                             <div class="btn-group-vertical btn-group-sm">
