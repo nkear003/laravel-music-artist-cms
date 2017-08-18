@@ -12,23 +12,25 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
-
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-    ];
-});
+//$factory->define(App\User::class, function (Faker\Generator $faker) {
+//    static $password;
+//
+//    return [
+//        'name' => $faker->name,
+//        'email' => $faker->unique()->safeEmail,
+//        'password' => $password ?: $password = bcrypt('secret'),
+//        'remember_token' => str_random(10),
+//    ];
+//});
 
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
 
+    $title = $faker->sentence(10);
+    $slug = str_slug($title);
+    
     return [
-        'title' => $faker->name,
-        'slug' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'title' => $title,
+        'slug' => $slug,
+        'path_to_image' => 'storage/images/wm/1502973686.jpg',
     ];
 });
