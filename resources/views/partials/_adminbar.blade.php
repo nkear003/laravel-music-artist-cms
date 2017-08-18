@@ -8,7 +8,7 @@
         <ul class="navbar-nav">
            <li class="nav-item"><a href="{{url('/')}}" class="nav-link {{ Request::is('admin') ? "active" : "" }}">Home</a></li> 
            <li class="nav-item">
-                <a class="nav-link {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases<!--<span class="sr-only">(current)</span>--></a>
+                <a class="nav-link {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{Request::is('posts') ? "active" : ""}}" href="{{url('/posts')}}">Posts</a>
