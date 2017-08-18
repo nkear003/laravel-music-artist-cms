@@ -25,12 +25,14 @@
 
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
 
-    $title = $faker->sentence(10);
+    $title = $faker->sentence(3);
     $slug = str_slug($title);
     
     return [
         'title' => $title,
         'slug' => $slug,
-        'path_to_image' => 'storage/images/wm/1502973686.jpg',
+//        'path_to_image' => 'storage/images/wm/1502973686.jpg',
+        'path_to_image' => $faker->imageUrl($width = 500, $height = 500),
+        'category_id' => mt_rand(1, 4),
     ];
 });

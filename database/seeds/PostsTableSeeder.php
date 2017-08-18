@@ -10,10 +10,7 @@ class PostsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        
-        factory(App\Post::class, 10)->create()->each(function($u) {
-            $u->posts()->save(factory(App\Post::class)->make());
-        });
+    {   
+        factory(App\Post::class, 20)->create()->make();
     }
 }
