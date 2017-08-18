@@ -32,7 +32,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'title' => $title,
         'slug' => $slug,
 //        'path_to_image' => 'storage/images/wm/1502973686.jpg',
-        'path_to_image' => $faker->imageUrl($width = 500, $height = 500),
+        'path_to_image' => $faker->imageUrl($width = 500, $height = 500, 'cats'),
         'category_id' => mt_rand(1, 4),
     ];
 });
