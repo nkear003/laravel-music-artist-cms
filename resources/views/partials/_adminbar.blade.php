@@ -6,7 +6,7 @@
 
     <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav">
-           <li class="nav-item"><a href="{{url('/home')}}" class="nav-link {{ Request::is('admin') ? "active" : "" }}">Home</a></li> 
+           <li class="nav-item"><a href="{{url('/')}}" class="nav-link {{ Request::is('admin') ? "active" : "" }}">Home</a></li> 
            <li class="nav-item">
                 <a class="nav-link {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases<!--<span class="sr-only">(current)</span>--></a>
             </li>
