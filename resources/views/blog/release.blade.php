@@ -1,34 +1,3 @@
-@extends('main')
-
-@section('title') | {{$post->title}} @endsection
-
-
-@section('content')
-<!--edit buttons-->
-<div class="row mb-3 d-flex justify-content-end">
-    <div class="card">
-        <div class="card-block">
-            <div class="btn-group" id="edit_buttons_box">    
-                <!--<button type="button" class="btn btn-default" id="hide__edit_buttons_box">Hide</button>-->
-
-                {!! Html::linkRoute('posts.edit', 'Edit', array($post->slug), array('class' => 'btn btn-primary')) !!}
-
-                {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete'] ) !!}
-
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-
-                {!! Form::close() !!}
-
-                <a href="{{route('posts.index')}}" class="btn btn-default">All Posts</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!--title-->
-<div class="row">
-    <div class="col"><h1>{{$post->title}}</h1></div>
-</div>
-<!--main content-->
 <div class="row" id="main-content">
     <!--left side-->
     <div class="col">  
@@ -75,4 +44,8 @@
 
 @include('partials._newsletter')
 
+@endsection
+
+@section('scripts')
+<script src="{{asset('js/script.js')}}"></script>
 @endsection

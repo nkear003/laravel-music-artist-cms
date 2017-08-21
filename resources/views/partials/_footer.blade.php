@@ -1,11 +1,10 @@
     <!-- Footer -->
-    <div class="footer container-fluid d-flex justify-content-center mt-5">
-        <div class="row">
-            <div>
-                <col>
-                    <p class="footer">Nicholas K Music @ {{date("Y")}}</p>
-                </col>
-            </div>
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            @if(!empty($posts)) {!! $posts->links() !!} @endif
+        </div>
+        <div class="row d-flex justify-content-center">
+            <p class="text-muted">Nicholas K Music | All Rights Reserved | {{date("Y")}}</p>
         </div>
     </div>
 

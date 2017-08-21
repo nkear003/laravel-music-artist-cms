@@ -1,15 +1,15 @@
 @extends('main')
 
-@section('title', ' | Releases')
+@section('title', ' | Posters')
 
 @section('content')
-        
+
 <div class="row">
-    <h1>This is the releases page.</h1>
-</div>
+    <h1>This is the posts page.</h1>
+</div>    
     
 <div class="row">
-    
+
     @for($i = 0; $i < count($posts); $i++)
     <div class="col">
         <a href="{{route('posts.show', $posts[$i]->slug)}}">
@@ -25,4 +25,3 @@
     
 
 @endsection
-

@@ -263,4 +263,12 @@ class PostsController extends Controller
         return redirect()->route('posts.index');
         
     }
+    
+        public function release($slug) {
+            
+            $post = Post::where('slug', $slug)->first();
+            return view('blog.release')->withSlug($slug);
+            
+//            return view('blog.release')->withSlug($slug);
+    }
 }

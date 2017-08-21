@@ -11,7 +11,10 @@
                 <a class="nav-link {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{Request::is('posts') ? "active" : ""}}" href="{{url('/posts')}}">Posts</a>
+                <a class="nav-link {{Request::is('posts') ? "active" : ""}}" href="{{url('/posts')}}">Posts Index</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{Request::is('allposts') ? "active" : ""}}" href="{{url('/allposts')}}">User Posts</a>
             </li>
             <li class="nav-item"><a class="nav-link {{ Request::is('files') ? "active" : ""}}" href="{{url('/files')}}">Files</a></li>
             <li class="nav-item"><a href="#" id="show_user_nav" class="nav-link">Show User Nav</a></li>

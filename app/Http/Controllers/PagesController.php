@@ -31,23 +31,37 @@ class PagesController extends Controller
         return view('pages.admin');
     }
     
-    public function posts() {
-        $post = Post::find(4);
-        return view('pages.posts')->withPost($post);
-    }
     
     public function news() {
         $posts = Post::orderBy('id', 'desc')/*->limit(3)*/->get();
         return view('pages.news')->withPosts($posts)->withPosts($posts);
     }
+
+    public function posts() {
+        $posts = Post::where('category_id', 2)->orderBy('id', 'desc')->paginate(4);
+        
+        return view('pages.posts')->withPosts($posts);
+    }
     
     public function releases() 
     {
-        $releases = Post::where('category_id', 1)->limit(10)->get();
-//        $releases = Post::all();
-//        $releases = Post::find(1);
+        $posts = Post::where('category_id', 1)->orderBy('id', 'desc')->paginate(4);
         
-        return view('pages.releases')->withReleases($releases);
+        return view('pages.releases')->withPosts($posts);
+    }
+    
+    public function wm() {
+        
+        $posts = Post::where('category_id', 3)->orderBy('id', 'desc')->paginate(8);
+        
+        return view('pages.wm')->withPosts($posts);
+    }
+    
+    public function posters() {
+        
+        $posts = Post::where('category_id', 4)->orderBy('id', 'desc')->paginate(6);
+        
+        return view('pages.posters')->withPosts($posts);
     }
     
     public function home()
