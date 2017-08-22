@@ -19,8 +19,8 @@ class CreateImagesTable extends Migration
             $table->increments('id');
 //            $table->boolean('is_active')->default(false);
             $table->boolean('is_featured')->default(false);
-            $table->string('image_name')->unique();
-            $table->string('image_path');
+            $table->string('title')->unique();
+            $table->string('path_to_image');
             $table->string('category_id');
 //            $table->string('image_extension', 10);
 //            $table->string('mobile_image_name')->unique();
