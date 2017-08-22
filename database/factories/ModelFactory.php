@@ -39,11 +39,11 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Image::class, function (Faker\Generator $faker) {
 
-    $title = $faker->sentence(3);
-    $slug = str_slug($title);
+    $slug = $faker->sentence(3);
+    $slug = str_slug($slug);
     
     return [
-        'title' => $title,
+        'title' => $slug,
         'path_to_image' => $faker->imageUrl($width = 500, $height = 500),
         'category_id' => mt_rand(1, 4),
     ];
