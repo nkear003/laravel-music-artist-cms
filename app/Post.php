@@ -12,4 +12,9 @@ class Post extends Model
     {
         return $this->belongsTo('App\Category');
     }
+    
+    public function image() 
+    {
+        return $this->belongsTo('App\Image');
+    }
 }

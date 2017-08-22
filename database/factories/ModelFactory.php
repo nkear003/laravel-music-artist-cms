@@ -38,7 +38,9 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Image::class, function (Faker\Generator $faker) {
-
+    
+    
+    
     $slug = $faker->sentence(3);
     $slug = str_slug($slug);
     

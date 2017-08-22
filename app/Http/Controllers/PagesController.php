@@ -59,7 +59,7 @@ class PagesController extends Controller
     
     public function posters() {
         
-        $posts = Post::where('category_id', 4)->orderBy('id', 'desc')->paginate(6);
+        $posts = Image::where('category_id', 4)->orderBy('id', 'desc')->paginate(8);
         
         return view('pages.posters')->withPosts($posts);
     }

@@ -12,11 +12,9 @@
 
     @for($i = 0; $i < count($posts); $i++)
     <div class="col">
-        <a href="{{route('posts.show', $posts[$i]->slug)}}">
-            <img class="img-fluid img-thumbnail" src="{{$posts[$i]->path_to_image}}" alt="">
-        </a>
+        <img class="img-fluid img-thumbnail" src="{{$posts[$i]->path_to_image}}" alt="">
     </div>    
-    @if( $i > 0 && ($i == 1 || $i % 3 == 0))
+    @if( $i > 0 && ($i ==1 || $i == 3 || $i == 5))
 </div>
 <div class="row mt-3">
     @endif
