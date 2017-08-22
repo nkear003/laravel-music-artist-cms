@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class File extends Model
 {
-    protected $table = 'images';
+    protected $table = 'files';
     
     public function category() 
     {

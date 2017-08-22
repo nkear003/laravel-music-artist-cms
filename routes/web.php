@@ -12,11 +12,8 @@ Route::get('/about', 'PagesController@about');
 Route::get('/releases', 'PagesController@releases');
 Route::get('/wm', 'PagesController@wm');
 Route::get('/posters', 'PagesController@posters');
-
-Route::get('/test', 'PagesController@test');
-
 Route::get('/allposts', 'PagesController@posts');
-Route::get('/files', 'PagesController@files');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +22,11 @@ Route::get('/files', 'PagesController@files');
 */
 
 Route::resource('posts', 'PostsController');
+
+/*
+|--------------------------------------------------------------------------
+| Image Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::resource('files', 'FilesController');

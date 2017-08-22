@@ -8,6 +8,7 @@ use Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 use Image;
+use App\Image as Img;
 
 class PostsController extends Controller
 {
@@ -47,42 +48,57 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        // php validate the data
-
-        $this->validate($request, array(
-            'title' => 'required|max:255|unique:posts,title'   
-        ));
-
-        // store Post in database
-
+        
+        // create new object for post
         $post = new Post;
         
+        // process image, if exists
         if ($request->hasFile('image')) {
             
+            //create new image obj
+            $img = new Img;
+            
+            // set image var and filename
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             
+            // determine what category the image is
+            // 1 = Release, 2 = Post, 3 = WM, 4 = Poster
             if ($request->wm) {
                 $location = public_path('storage/images/wm/' . $filename);
                 $path = 'storage/images/wm/' . $filename;
+                $category = 3;
+                $image_id = $category;
             } else if($request->poster) {
                 $location = public_path('storage/images/posters/' . $filename);
                 $path = 'storage/images/posters/' . $filename;
+                $image_id = 4;
+                $category = 4;
             } else {
                 $location = public_path('storage/images/' . $filename);
                 $path = 'storage/images/' . $filename;
+                $image_id = 1;
+                $category = 1;
             }
             
+            // resize and save the image
             Image::make($image)->resize(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($location);
             
-            $post->path_to_image = $path;
+            // set post parameters
             $post->image = $filename;
+            $post->image_id = $img->id;
             
+            // set image parameters
+            $img->path_to_image = $path;
+            $img->title = $filename;
+            
+            // save img to images table
+            $img->save();
         }
         
-        
+        // process WAV zip if exists
         if ($request->hasFile('wav')) {
             
             $wav = $request->file('wav');
@@ -92,7 +108,7 @@ class PostsController extends Controller
             $post->wav = $filename;
         }
         
-                
+        // process WAV zip if exists (old)
 //        if (!empty($request->wav)) {
 //
 //            $wav = $request->wav;
@@ -102,7 +118,8 @@ class PostsController extends Controller
 //            Storage::disk('local')->putFileAs('zips', $wav, $wav->title);
 //            
 //        }
-     
+        
+        // process mp3 zip if exists
         if (!empty($request->mp3)) {
 
             $mp3 = $request->mp3;
@@ -115,23 +132,32 @@ class PostsController extends Controller
 
         }
             
-        $post->title = $request->title;
-        $post->slug = str_slug($post->title, '-');
-        $post->description = $request->description;
-        $post->released = $request->released;
-        $post->mastered_by = $request->mastered_by;
-        $post->genre = $request->genre;
-        $post->soundcloud_id = $request->soundcloud_id;
+        // if post
+        if ($request->type('Release')) {
+            
+            // php validate the data
+            $this->validate($request, array(
+                'title' => 'required|max:255|unique:posts,title'   
+            ));
+            
+            // set post parameters
+            $post->title = $request->title;
+            $post->slug = str_slug($post->title, '-');
+            $post->description = $request->description;
+            $post->released = $request->released;
+            $post->mastered_by = $request->mastered_by;
+            $post->genre = $request->genre;
+            $post->soundcloud_id = $request->soundcloud_id;
 
-        $post->save();
+            // save post
+            $post->save();
+        }
 
         // success message
+        Session::flash('success', 'The form was successfully posted.');
 
-        Session::flash('success', 'The release was successfully created.');
-
-        // redirect
-
-        return redirect()->route('posts.show', $post->slug);
+        // ...& redirect
+        return redirect()->route('posts.index', $post->slug);
     }
 
     /**

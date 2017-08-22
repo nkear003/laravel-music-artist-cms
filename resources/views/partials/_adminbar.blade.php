@@ -8,6 +8,7 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a href="{{url('/')}}" class="nav-link {{ Request::is('admin') ? "active" : "" }}">Home</a></li> 
             <li class="nav-item"><a class="nav-link" href="{{url('/posts')}}">Posts Index</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('files.index')}}">Files Index</a></li>
             <li class="nav-item"><a class="nav-link {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases</a></li>
             <li class="nav-item"><a class="nav-link {{ Request::is('posters') ? "active" : ""}}" href="{{url('/posters')}}">Posters</a></li>
             <li class="nav-item"><a class="nav-link {{ Request::is('wm') ? "active" : ""}}" href="{{url('/wm')}}">WM</a></li>

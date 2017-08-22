@@ -4,32 +4,24 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImagesTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    
     public function up()
     {
-        Schema::create('images', function(Blueprint $table)
-        {
+        Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
-//            $table->boolean('is_active')->default(false);
             $table->boolean('is_featured')->default(false);
             $table->string('title')->unique();
             $table->string('path_to_image');
             $table->string('category_id');
-//            $table->string('image_extension', 10);
-//            $table->string('mobile_image_name')->unique();
-//            $table->string('mobile_image_path');
-//            $table->string('mobile_extension', 10);
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -38,6 +30,6 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('files');
     }
 }
