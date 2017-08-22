@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="row">
-    <h1>This is the posts page.</h1>
+    <h1>This is the posters page.</h1>
 </div>    
     
 <div class="row">

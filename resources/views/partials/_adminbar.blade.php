@@ -6,17 +6,11 @@
 
     <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav">
-           <li class="nav-item"><a href="{{url('/')}}" class="nav-link {{ Request::is('admin') ? "active" : "" }}">Home</a></li> 
-           <li class="nav-item">
-                <a class="nav-link {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{Request::is('posts') ? "active" : ""}}" href="{{url('/posts')}}">Posts Index</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{Request::is('allposts') ? "active" : ""}}" href="{{url('/allposts')}}">User Posts</a>
-            </li>
-            <li class="nav-item"><a class="nav-link {{ Request::is('files') ? "active" : ""}}" href="{{url('/files')}}">Files</a></li>
+            <li class="nav-item"><a href="{{url('/')}}" class="nav-link {{ Request::is('admin') ? "active" : "" }}">Home</a></li> 
+            <li class="nav-item"><a class="nav-link" href="{{url('/posts')}}">Posts Index</a></li>
+            <li class="nav-item"><a class="nav-link {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases</a></li>
+            <li class="nav-item"><a class="nav-link {{ Request::is('posters') ? "active" : ""}}" href="{{url('/posters')}}">Posters</a></li>
+            <li class="nav-item"><a class="nav-link {{ Request::is('wm') ? "active" : ""}}" href="{{url('/wm')}}">WM</a></li>
             <li class="nav-item"><a href="#" id="show_user_nav" class="nav-link">Show User Nav</a></li>
         </ul>
     </div>

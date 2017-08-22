@@ -5,6 +5,10 @@
 @section('content')
     
 <div class="row">
+    <h1>This is the Weekend Mixtapes page.</h1>
+</div>
+    
+<div class="row">
 
     @for($i = 0; $i < count($posts); $i++)
     <div class="col">
