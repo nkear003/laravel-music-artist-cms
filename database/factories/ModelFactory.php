@@ -31,8 +31,20 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'title' => $title,
         'slug' => $slug,
-//        'path_to_image' => 'storage/images/wm/1502973686.jpg',
-        'path_to_image' => $faker->imageUrl($width = 500, $height = 500, 'cats'),
+//        'path_to_image' => $faker->imageUrl($width = 500, $height = 500),
+        'category_id' => mt_rand(1, 4),
+        'image_id' => mt_rand(1, 10),
+    ];
+});
+
+$factory->define(App\Image::class, function (Faker\Generator $faker) {
+
+    $title = $faker->sentence(3);
+    $slug = str_slug($title);
+    
+    return [
+        'title' => $title,
+        'path_to_image' => $faker->imageUrl($width = 500, $height = 500),
         'category_id' => mt_rand(1, 4),
     ];
 });
