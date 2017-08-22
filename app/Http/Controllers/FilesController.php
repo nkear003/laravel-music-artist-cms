@@ -27,7 +27,7 @@ class FilesController extends Controller
      */
     public function create()
     {
-        //
+        return view('files.upload');
     }
 
     /**
@@ -38,7 +38,78 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        //create new image obj
+        $image = new File;
+        
+        // process image, if exists
+        if ($request->hasFile('image')) {    
+            
+            // set image var and filename
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            
+            // determine what category the image is
+            // 1 = Release, 2 = Post, 3 = WM, 4 = Poster
+            if ($request->wm) {
+                $location = public_path('storage/images/wm/' . $filename);
+                $path = 'storage/images/wm/' . $filename;
+                $category = 3;
+                $image_id = $category;
+            } else if($request->poster) {
+                $location = public_path('storage/images/posters/' . $filename);
+                $path = 'storage/images/posters/' . $filename;
+                $image_id = 4;
+                $category = 4;
+            } else {
+                $location = public_path('storage/images/' . $filename);
+                $path = 'storage/images/' . $filename;
+                $image_id = 1;
+                $category = 1;
+            }
+            
+            // resize and save the image
+            Image::make($image)->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($location);
+            
+            // set image parameters
+            $image->path_to_image = $path;
+            $image->title = $filename;
+            
+            // save img to images table
+            $image->save();
+        }
+        
+        // process WAV zip if exists
+        if ($request->hasFile('wav')) {
+            
+            $wav = $request->file('wav');
+            $filename = $wav->getOriginalClientName();
+            $location = 
+            
+            $post->wav = $filename;
+        }
+        
+        // process mp3 zip if exists
+        if (!empty($request->mp3)) {
+
+            $mp3 = $request->mp3;
+            $mp3->origName = $mp3->getClientOriginalName();
+            $mp3->title = $mp3->origName;
+
+            $post->mp3 = $mp3->title;
+
+            Storage::disk('local')->putFileAs('zips', $mp3, $mp3->title);
+
+        }
+
+        // success message
+        Session::flash('success', 'The form was successfully posted.');
+
+        // ...& redirect
+        return redirect()->route('files.index');
+        
     }
 
     /**

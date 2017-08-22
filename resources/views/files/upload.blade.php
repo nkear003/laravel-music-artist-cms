@@ -35,25 +35,9 @@
 
         <hr>
 
-        {!! Form::open(['route' => 'images.store', 'files' => 'true', 'data-parsley-validate' => '']) !!}        
-            <!--image-->
-            {{ Form::label('image', 'Image: ') }}
-            {{ Form::file('image', array('class' => 'input-group form-control-file')) }}
+        {!! Form::open(['route' => 'files.store', 'files' => 'true', 'data-parsley-validate' => '']) !!}        
             
-            <!--Image Type-->
-            {{ Form::checkbox('wm') }} WM <br>
-            {{ Form::checkbox('poster') }} Poster
-            <small id="fileHelp" class="form-text text-muted">Upload image.</small>
-            
-            <!--wav-->
-            {{ Form::label('wav', 'WAV zip: ') }}
-            {{ Form::file('wav', array('class' => 'input-group form-control-file')) }}
-            <small id="fileHelp" class="form-text text-muted">Upload WAV zip.</small>
-                   
-            <!--mp3-->
-            {{ Form::label('mp3', 'MP3 zip: ') }}
-            {{ Form::file('mp3', array('class' => 'input-group form-control-file')) }}
-            <small id="fileHelp" class="form-text text-muted">Upload MP3 zip.</small>
+            @include('partials._fileupload')
             
             <!--submit-->
             {{ Form::submit('Create Post', array('class' => 'btn btn-primary btn-lg btn-block margin-top mt-3')) }}
