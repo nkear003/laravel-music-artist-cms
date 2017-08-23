@@ -16,6 +16,8 @@
                 <div class="offset-1 col-10">
 
                     @include('partials._messages')
+                    
+                    
 
                     @yield('content')
 

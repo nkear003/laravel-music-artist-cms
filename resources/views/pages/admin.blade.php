@@ -9,18 +9,18 @@
 <!--content-->
 <div class="row">
     <div class="col">
-        <a href="{{route('posts.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">Create New Release</a>
+        <a href="{{route('posts.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">Create New Post</a>
     </div>
     <div class="col">
-        <a href="{{route('posts.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">Upload File</a>
+        <a href="{{route('files.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">Upload File</a>
     </div>
 </div>
 <div class="row mt-5">
     <div class="col">
-        <a href="{{route('posts.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">Write a Blog Post</a>
+        <a href="#" class="btn btn-primary btn-block btn-lg pb-5 pt-5">-</a>
     </div>
     <div class="col">
-        <a href="{{route('posts.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">-</a>
+        <a href="#" class="btn btn-primary btn-block btn-lg pb-5 pt-5">-</a>
     </div>
 </div>
 

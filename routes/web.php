@@ -30,3 +30,16 @@ Route::resource('posts', 'PostsController');
 */
 
 Route::resource('files', 'FilesController');
+
+/*
+|--------------------------------------------------------------------------
+| Auth Routes
+|--------------------------------------------------------------------------
+*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+// Password reset routes
