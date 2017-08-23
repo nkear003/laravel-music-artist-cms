@@ -56,8 +56,8 @@ class PostsController extends Controller
             'title' => 'required|max:255|unique:posts,title'   
         ));
         
+        // run the processFiles function and return variables
         $file = new File;
-        
         $file->processFiles($request);
         $img_id = $file->getVars();
             
