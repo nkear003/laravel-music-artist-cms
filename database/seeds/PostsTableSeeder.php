@@ -12,5 +12,12 @@ class PostsTableSeeder extends Seeder
     public function run()
     {   
         factory(App\Post::class, 20)->create()->make();
+/*        DB::table('posts')->insert([
+            'name' => '',
+            'released' => '',
+            'genre' => '',
+            'soundcloud_id' => '',
+            'slug' => ''
+        ]);*/
     }
 }

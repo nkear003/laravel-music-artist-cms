@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\File;
 use Image;
+use Session;
 
 class FilesController extends Controller
 {
@@ -38,12 +39,12 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        
-        //create new image obj
-        $image = new File;
-        
+
         // process image, if exists
         if ($request->hasFile('image')) {    
+            
+            //create new image obj
+            $img = new File;
             
             // set image var and filename
             $image = $request->file('image');
@@ -74,11 +75,12 @@ class FilesController extends Controller
             })->save($location);
             
             // set image parameters
-            $image->path_to_image = $path;
-            $image->title = $filename;
+            $img->path_to_image = $path;
+            $img->title = $filename;
+            $img->category_id = $category;
             
             // save img to images table
-            $image->save();
+            $img->save();
         }
         
         // process WAV zip if exists

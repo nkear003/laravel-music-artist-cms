@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use App\Image;
+use App\File;
 
 class PagesController extends Controller
 {
@@ -52,14 +52,14 @@ class PagesController extends Controller
     
     public function wm() {
         
-        $posts = Image::where('category_id', 3)->orderBy('id', 'desc')->paginate(9);
+        $posts = File::where('category_id', 3)->orderBy('id', 'desc')->paginate(9);
         
         return view('pages.wm')->withPosts($posts);
     }
     
     public function posters() {
         
-        $posts = Image::where('category_id', 4)->orderBy('id', 'desc')->paginate(8);
+        $posts = File::where('category_id', 4)->orderBy('id', 'desc')->paginate(8);
         
         return view('pages.posters')->withPosts($posts);
     }

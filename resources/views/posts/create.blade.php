@@ -26,8 +26,8 @@
             
                 
             <!--description-->
-            {{ Form::label('description', 'Description:') }}
-            {{ Form::textarea('description', null, array('class' => 'form-control') ) }}
+            {{ Form::label('body', 'Body:') }}
+            {{ Form::textarea('body', null, array('class' => 'form-control') ) }}
 
             <!--release date-->
             {{ Form::label('released', 'Released:') }}

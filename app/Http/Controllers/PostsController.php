@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Post;
 use Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
+//use Illuminate\Http\File;
 use Image;
-use App\Image as Img;
+use App\File;
 
 class PostsController extends Controller
 {
@@ -48,15 +48,19 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        
-        // create new object for post
+        // make a new Post object
         $post = new Post;
         
+        // php validate the data
+        $this->validate($request, array(
+            'title' => 'required|max:255|unique:posts,title'   
+        ));
+        
         // process image, if exists
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {    
             
             //create new image obj
-            $img = new Img;
+            $img = new File;
             
             // set image var and filename
             $image = $request->file('image');
@@ -86,13 +90,10 @@ class PostsController extends Controller
                 $constraint->aspectRatio();
             })->save($location);
             
-            // set post parameters
-            $post->image = $filename;
-            $post->image_id = $img->id;
-            
             // set image parameters
             $img->path_to_image = $path;
             $img->title = $filename;
+            $img->category_id = $category;
             
             // save img to images table
             $img->save();
@@ -108,17 +109,6 @@ class PostsController extends Controller
             $post->wav = $filename;
         }
         
-        // process WAV zip if exists (old)
-//        if (!empty($request->wav)) {
-//
-//            $wav = $request->wav;
-//            $wav->origName = $wav->getClientOriginalName();
-//            $wav->title = $wav->origName;
-//            $post->wav = $wav->title;
-//            Storage::disk('local')->putFileAs('zips', $wav, $wav->title);
-//            
-//        }
-        
         // process mp3 zip if exists
         if (!empty($request->mp3)) {
 
@@ -131,27 +121,21 @@ class PostsController extends Controller
             Storage::disk('local')->putFileAs('zips', $mp3, $mp3->title);
 
         }
+        
             
-        // if post
-        if ($request->type('Release')) {
-            
-            // php validate the data
-            $this->validate($request, array(
-                'title' => 'required|max:255|unique:posts,title'   
-            ));
-            
-            // set post parameters
-            $post->title = $request->title;
-            $post->slug = str_slug($post->title, '-');
-            $post->description = $request->description;
-            $post->released = $request->released;
-            $post->mastered_by = $request->mastered_by;
-            $post->genre = $request->genre;
-            $post->soundcloud_id = $request->soundcloud_id;
+        // set post parameters
+        $post->title = $request->title;
+        $post->slug = str_slug($post->title, '-');
+        $post->body = $request->body;
+        $post->released = $request->released;
+        $post->mastered_by = $request->mastered_by;
+        $post->genre = $request->genre;
+        $post->soundcloud_id = $request->soundcloud_id;
+        $post->category_id = 1;
+        $post->image_id = $img->id;
 
-            // save post
-            $post->save();
-        }
+        // save post
+        $post->save();
 
         // success message
         Session::flash('success', 'The form was successfully posted.');
@@ -247,7 +231,7 @@ class PostsController extends Controller
 
         $post->title = $request->input('title');
         $post->slug = str_slug($post->title, '-');
-        $post->description = $request->input('description');
+        $post->body = $request->input('body');
         $post->released = $request->input('released');
         $post->mastered_by = $request->input('mastered_by');
         $post->genre = $request->input('genre');
