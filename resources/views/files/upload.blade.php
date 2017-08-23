@@ -2,27 +2,9 @@
 
 @section('title', ' | Create New Post')
 
-@section('inline-script')
-
-<script>
-    function run() {
-        var box = document.getElementById("select-box");
-        var selection = box.options[box.selectedIndex].text;
-        
-        if (selection === 'File') {
-            $(".release").addClass("hide");
-        } else if (selection === 'Release') {
-            $(".release").removeClass("hide");
-        }
-    }
-    
-</script>
-
-@endsection
-
 @section('css')
 
-<link rel="stylesheet" href="{{ URL::asset('css/parsley.css') }}">
+<link rel="stylesheet" href="{{ asset('css/parsley.min.css') }}">
 
 @endsection
 

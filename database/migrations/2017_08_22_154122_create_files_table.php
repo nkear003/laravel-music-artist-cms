@@ -16,7 +16,7 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('is_featured')->default(false);
-            $table->string('title')->unique();
+            $table->string('title')->nullable();
             $table->string('path_to_image');
             $table->string('category_id');
             $table->timestamps();

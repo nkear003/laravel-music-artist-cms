@@ -1,6 +1,6 @@
 <!--image-->
-{{ Form::label('image', 'Image: ') }}
-{{ Form::file('image[]', array('class' => 'input-group form-control-file')) }}
+{{ Form::label('images', 'Image: ') }}
+{{ Form::file('images[]', array('class' => 'input-group form-control-file', 'multiple' => 'multiple')) }}
 
 <!--Image Type-->
 {{ Form::checkbox('wm') }} WM <br>

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use Session;
-use Illuminate\Support\Facades\Storage;
-//use Illuminate\Http\File;
+//use Illuminate\Support\Facades\Storage;
+use Storage;
 use Image;
 use App\File;
 
@@ -56,72 +56,10 @@ class PostsController extends Controller
             'title' => 'required|max:255|unique:posts,title'   
         ));
         
-        // process image, if exists
-        if ($request->hasFile('image')) {    
-            
-            //create new image obj
-            $img = new File;
-            
-            // set image var and filename
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            
-            // determine what category the image is
-            // 1 = Release, 2 = Post, 3 = WM, 4 = Poster
-            if ($request->wm) {
-                $location = public_path('storage/images/wm/' . $filename);
-                $path = 'storage/images/wm/' . $filename;
-                $category = 3;
-                $image_id = $category;
-            } else if($request->poster) {
-                $location = public_path('storage/images/posters/' . $filename);
-                $path = 'storage/images/posters/' . $filename;
-                $image_id = 4;
-                $category = 4;
-            } else {
-                $location = public_path('storage/images/' . $filename);
-                $path = 'storage/images/' . $filename;
-                $image_id = 1;
-                $category = 1;
-            }
-            
-            // resize and save the image
-            Image::make($image)->resize(500, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($location);
-            
-            // set image parameters
-            $img->path_to_image = $path;
-            $img->title = $filename;
-            $img->category_id = $category;
-            
-            // save img to images table
-            $img->save();
-        }
+        $file = new File;
         
-        // process WAV zip if exists
-        if ($request->hasFile('wav')) {
-            
-            $wav = $request->file('wav');
-            $filename = $wav->getOriginalClientName();
-            $location = 
-            
-            $post->wav = $filename;
-        }
-        
-        // process mp3 zip if exists
-        if (!empty($request->mp3)) {
-
-            $mp3 = $request->mp3;
-            $mp3->origName = $mp3->getClientOriginalName();
-            $mp3->title = $mp3->origName;
-
-            $post->mp3 = $mp3->title;
-
-            Storage::disk('local')->putFileAs('zips', $mp3, $mp3->title);
-
-        }
-        
+        $file->processFiles($request);
+        $img_id = $file->getVars();
             
         // set post parameters
         $post->title = $request->title;
@@ -132,7 +70,7 @@ class PostsController extends Controller
         $post->genre = $request->genre;
         $post->soundcloud_id = $request->soundcloud_id;
         $post->category_id = 1;
-        $post->image_id = $img->id;
+        $post->image_id = $img_id;
 
         // save post
         $post->save();
