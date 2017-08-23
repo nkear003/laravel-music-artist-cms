@@ -56,7 +56,7 @@ class File extends Model
                 })->save($location);
 
                 // set file parameters for DB
-                $img->path_to_image = $path;
+                $img->path = $path;
                 $img->title = $image->getClientOriginalName();
                 $img->category_id = $category;
 

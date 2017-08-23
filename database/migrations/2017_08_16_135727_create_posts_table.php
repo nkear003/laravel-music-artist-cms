@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-//            $table->string('path_to_image')->nullable();
+//            $table->string('path')->nullable();
             $table->string('image_id')->nullable();
             $table->text('body')->nullable();
             $table->date('released')->default(Carbon::now());

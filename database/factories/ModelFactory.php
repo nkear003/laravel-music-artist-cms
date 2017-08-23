@@ -31,7 +31,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'title' => $title,
         'slug' => $slug,
-//        'path_to_image' => $faker->imageUrl($width = 500, $height = 500),
+//        'path' => $faker->imageUrl($width = 500, $height = 500),
         'category_id' => mt_rand(1, 4),
         'image_id' => mt_rand(1, 10),
     ];
@@ -45,7 +45,8 @@ $factory->define(App\File::class, function (Faker\Generator $faker) {
     
     return [
         'title' => $slug,
-        'path_to_image' => $faker->imageUrl($width = 500, $height = 500),
+        'path' => $faker->imageUrl($width = 500, $height = 500),
+        'type' => 'image',
         'category_id' => mt_rand(1, 4),
     ];
 });

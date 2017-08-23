@@ -2,7 +2,7 @@
     <!--left side-->
     <div class="col">  
         <!--img-->
-        <img src="{{ asset($post->path_to_image) }}" alt="{{ $post->image }}">
+        <img src="{{ asset($post->path) }}" alt="{{ $post->image }}">
         <hr>
         <!--info-->
         <ul>

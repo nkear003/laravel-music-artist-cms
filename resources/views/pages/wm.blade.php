@@ -12,7 +12,7 @@
 
     @for($i = 0; $i < count($posts); $i++)
     <div class="col">
-        <img class="img-fluid rounded-circle img-thumbnail" src="{{$posts[$i]->path_to_image}}" alt="">
+        <img class="img-fluid rounded-circle img-thumbnail" src="{{$posts[$i]->path}}" alt="">
     </div>    
     @if($i == 2 || $i == 5)
 </div>

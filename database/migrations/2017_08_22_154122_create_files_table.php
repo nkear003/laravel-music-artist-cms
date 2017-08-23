@@ -17,7 +17,8 @@ class CreateFilesTable extends Migration
             $table->increments('id');
             $table->boolean('is_featured')->default(false);
             $table->string('title')->nullable();
-            $table->string('path_to_image');
+            $table->string('type');
+            $table->string('path');
             $table->string('category_id');
             $table->timestamps();
         });

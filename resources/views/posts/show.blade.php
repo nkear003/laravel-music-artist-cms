@@ -33,7 +33,7 @@
     <!--left side-->
     <div class="col">  
         <!--img-->
-        <img src="{{ asset($post->image->path_to_image) }}" alt="{{ $post->image }}">
+        <img src="{{ asset($post->image->path) }}" alt="">
         <hr>
         <!--info-->
         <ul>

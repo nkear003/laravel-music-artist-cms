@@ -35,7 +35,7 @@
                     <tr>
                         <th scope="row">{{$post->id}}</th>
                         <td><a href="{{route('files.show', $post->id)}}">{{$post->title}}</a></td>
-                        <td><img src="{{asset($post->path_to_image)}}" class="img-thumbnail img-fluid thumb"></td>
+                        <td><img src="{{asset($post->path)}}" class="img-thumbnail img-fluid thumb"></td>
                         <td>{{$post->category->name}}</td>
                         <td>{{date('M j, Y', strtotime($post->created_at))}}</td>
                         <td>

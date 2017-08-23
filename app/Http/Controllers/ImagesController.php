@@ -81,7 +81,7 @@ class ImagesController extends Controller
             $post->image_id = $img->id;
             
             // set image parameters
-            $img->path_to_image = $path;
+            $img->path = $path;
             $img->title = $filename;
             
             // save img to images table
