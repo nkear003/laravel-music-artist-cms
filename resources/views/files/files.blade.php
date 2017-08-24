@@ -7,7 +7,7 @@
 <!--title-->
 <div class="row mb-1">
     <div class="col">
-        <h1>All images</h1>
+        <h1>All Files</h1>
     </div>
     <div class="col d-flex justify-content-end">
         <a href="{{ route('files.create') }}">
