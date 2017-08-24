@@ -13,6 +13,7 @@ class Post extends Model
         return $this->belongsTo('App\Category');
     }
     
+    // this should be changed to file
     public function image() 
     {
         return $this->belongsTo('App\File');
