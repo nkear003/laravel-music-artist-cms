@@ -23,6 +23,7 @@
                     <a class="dropdown-item {{ Request::is('wm') ? "active" : ""}}" href="{{url('/wm')}}">WM</a>
                 </div>
             </div>
+            <li class="nav-item"><a href="#" id="show_user_nav" class="nav-link">Show User Nav</a></li>
         </ul>
     </div>
 </nav>
