@@ -8,11 +8,21 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a href="{{url('/')}}" class="nav-link {{ Request::is('admin') ? "active" : "" }}">Home</a></li> 
             <li class="nav-item"><a class="nav-link" href="{{url('/posts')}}">Posts Index</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{route('files.index')}}">Files Index</a></li>
-            <li class="nav-item"><a class="nav-link {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases</a></li>
-            <li class="nav-item"><a class="nav-link {{ Request::is('posters') ? "active" : ""}}" href="{{url('/posters')}}">Posters</a></li>
-            <li class="nav-item"><a class="nav-link {{ Request::is('wm') ? "active" : ""}}" href="{{url('/wm')}}">WM</a></li>
-            <li class="nav-item"><a href="#" id="show_user_nav" class="nav-link">Show User Nav</a></li>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Files</a>
+                <div class="dropdown-menu">
+                    <a href="{{route('files.create')}}" class="dropdown-item">Upload File</a>
+                    <a href="{{route('files.index')}}" class="dropdown-item">Files Index</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases</a>
+                    <a class="dropdown-item {{ Request::is('posters') ? "active" : ""}}" href="{{url('/posters')}}">Posters</a>
+                    <a class="dropdown-item {{ Request::is('wm') ? "active" : ""}}" href="{{url('/wm')}}">WM</a>
+                </div>
+            </div>
         </ul>
     </div>
 </nav>
