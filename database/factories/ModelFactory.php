@@ -31,7 +31,6 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'title' => $title,
         'slug' => $slug,
-//        'path' => $faker->imageUrl($width = 500, $height = 500),
         'category_id' => mt_rand(1, 4),
         'image_id' => mt_rand(1, 10),
     ];
