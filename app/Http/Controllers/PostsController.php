@@ -56,10 +56,16 @@ class PostsController extends Controller
             'title' => 'required|max:255|unique:posts,title'   
         ));
         
-        // run the processFiles function and return variables
+        // run the processFiles function
         $file = new File;
         $file->processFiles($request);
-        $img_id = $file->getVars();
+        
+        // return and assign variables
+        $file_vars = $file->getVars();
+        $img_id = $file_vars->img_id;    
+        $wav_id = $file_vars->wav_id;
+        $mp3_id = $file_vars->mp3_id;
+        $category_id = $file_vars->cat_id;
             
         // set post parameters
         $post->title = $request->title;
@@ -69,8 +75,10 @@ class PostsController extends Controller
         $post->mastered_by = $request->mastered_by;
         $post->genre = $request->genre;
         $post->soundcloud_id = $request->soundcloud_id;
-        $post->category_id = 1;
+        $post->category_id = $category_id;
         $post->image_id = $img_id;
+        $post->wav = $wav_id;
+        $post->mp3 = $mp3_id;
 
         // save post
         $post->save();
@@ -79,7 +87,7 @@ class PostsController extends Controller
         Session::flash('success', 'The form was successfully posted.');
 
         // ...& redirect
-        return redirect()->route('posts.index', $post->slug);
+        return redirect()->route('posts.show', $post->slug);
     }
 
     /**
