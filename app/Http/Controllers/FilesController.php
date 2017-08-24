@@ -39,8 +39,8 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-//        File::processFiles($request);
         
+        // change the $test variable name
         $test = new File;
         
         $test->processFiles($request);
