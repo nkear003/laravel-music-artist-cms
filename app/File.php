@@ -95,7 +95,7 @@ class File extends Model
             
             // set data for DB
             $wav->type = 'zip';
-            $wav->path = storage_path('app/zips/') . $filename;
+            $wav->path = 'storage/app/zips/' . $filename;
             $wav->category_id = 5; // 5 is no category
             
             // save to DB
@@ -120,7 +120,7 @@ class File extends Model
             
             //set data for DB
             $mp3->type = 'zip';
-            $mp3->path = storage_path('app/zips/') . $filename;
+            $mp3->path = 'storage/app/zips/' . $filename;
             $mp3->category_id = 5; // 5 is no category
             
             //save to DB
