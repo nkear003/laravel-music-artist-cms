@@ -58,12 +58,12 @@
         <h2>Download</h2>
         @endif
         @if($post->wav)
-        <a href="{{ asset('storage/zips/' . $post->wav) }}">
+        <a href="{{ asset('storage/zips/' . $post->image->path) }}">
             <button class="btn btn-primary">WAV</button>
         </a>
         @endif
         @if($post->mp3)
-        <a href="{{ asset('storage/zips/' . $post->mp3) }}">
+        <a href="{{ asset('storage/zips/' . $post->image->path) }}">
             <button class="btn btn-primary">MP3</button>     
         </a>
         @endif
