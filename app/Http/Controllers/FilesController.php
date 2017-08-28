@@ -41,9 +41,9 @@ class FilesController extends Controller
     {
         
         // change the $test variable name
-        $test = new File;
+        $file = new File;
         
-        $test->processFiles($request);
+        $file->processFiles($request);
         
         // success message
         Session::flash('success', 'The form was successfully posted.');
