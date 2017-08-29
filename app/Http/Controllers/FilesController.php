@@ -25,7 +25,7 @@ class FilesController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+      */
     public function create()
     {
         return view('files.upload');
@@ -46,7 +46,7 @@ class FilesController extends Controller
         $file->processFiles($request);
         
         // success message
-        Session::flash('success', 'The form was successfully posted.');
+        Session::flash('success', 'The form was successfully submitted.');
 
         // ...& redirect
         return redirect()->route('files.index');    
@@ -95,6 +95,22 @@ class FilesController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function download($path)
+    {
+        return response()->download($path);
+    }
+    public function getDownload($id)
+    {
+        
+        $file = File::where('id', $id)->first();
+        
+        $path = storage_path() . $file->path;
+        $headers = ['Content-Type' => 'application/octet-stream'];
+
+        return response()->download($path, $file->title, $headers);
+        
     }
     
 }

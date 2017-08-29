@@ -16,12 +16,14 @@ class File extends Model
     }
     
     public $img_id = null;
-    public $wav_id = null;
-    public $mp3_id = null;
+    public $wav_path = null;
+    public $mp3_path = null;
     public $cat_id = null;
     
     public function processFiles($request) 
-    {   
+    {
+        
+        $post_title = $request->title;
         
         // process image, if exists
         if ($request->hasFile('images')) {    
@@ -55,7 +57,7 @@ class File extends Model
                 {
                     $location = public_path('storage/images/' . $filename);
                     $path = 'storage/images/' . $filename;
-                    $cat_id = 5;
+                    $cat_id = 1;
                 }
 
                 // resize and save the image
@@ -95,14 +97,15 @@ class File extends Model
             
             // set data for DB
             $wav->type = 'zip';
-            $wav->path = 'storage/app/zips/' . $filename;
+            $wav->path = '/app/zips/' . $filename;
             $wav->category_id = 5; // 5 is no category
+            $wav->title = $post_title . '_wav';
             
             // save to DB
             $wav->save();
             
             // set global vars
-            $this->wav_id = $wav->id;
+            $this->wav_path = $wav->id;
         }
         
         // process mp3 zip if exists
@@ -120,14 +123,15 @@ class File extends Model
             
             //set data for DB
             $mp3->type = 'zip';
-            $mp3->path = 'storage/app/zips/' . $filename;
+            $mp3->path = '/app/zips/' . $filename;
             $mp3->category_id = 5; // 5 is no category
+            $mp3->title = $post_title . '_mp3';
             
             //save to DB
             $mp3->save();
             
             // set global variables
-            $this->mp3_id = $mp3->id;
+            $this->mp3_path = $mp3->id;
         }
         
     }

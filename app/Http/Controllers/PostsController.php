@@ -63,8 +63,8 @@ class PostsController extends Controller
         // return and assign variables
         $file_vars = $file->getVars();
         $img_id = $file_vars->img_id;    
-        $wav_id = $file_vars->wav_id;
-        $mp3_id = $file_vars->mp3_id;
+        $wav_path = $file_vars->wav_path;
+        $mp3_path = $file_vars->mp3_path;
         $category_id = $file_vars->cat_id;
             
         // set post parameters
@@ -77,8 +77,8 @@ class PostsController extends Controller
         $post->soundcloud_id = $request->soundcloud_id;
         $post->category_id = $category_id;
         $post->image_id = $img_id;
-        $post->wav = $wav_id;
-        $post->mp3 = $mp3_id;
+        $post->wav = $wav_path;
+        $post->mp3 = $mp3_path;
 
         // save post
         $post->save();

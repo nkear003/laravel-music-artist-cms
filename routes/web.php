@@ -43,3 +43,14 @@ Route::get('/home', 'HomeController@index');
 
 
 // Password reset routes
+
+/*
+|--------------------------------------------------------------------------
+| Download
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/download/{id}', [
+    'uses' => 'FilesController@getDownload',
+    'as' => 'download'
+]);
