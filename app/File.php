@@ -36,7 +36,7 @@ class File extends Model
                 $img = new File;
 
                 // set files name and type
-                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $filename = time() . '.' . $image->getClientOriginalName();
                 $type = 'image';
 
                 // determine what category the image is
