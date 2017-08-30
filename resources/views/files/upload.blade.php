@@ -22,7 +22,7 @@
             @include('partials._fileupload')
             
             <!--submit-->
-            {{ Form::submit('Create Post', array('class' => 'btn btn-primary btn-lg btn-block margin-top mt-3')) }}
+            {{ Form::submit('Upload File', array('class' => 'btn btn-primary btn-lg btn-block margin-top mt-3')) }}
 
         {!! Form::close() !!}
     
