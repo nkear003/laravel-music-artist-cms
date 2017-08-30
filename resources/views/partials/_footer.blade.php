@@ -2,6 +2,7 @@
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
             @if(!empty($posts)) {!! $posts->links() !!} @endif
+            @if(!empty($files)) {!! $files->links() !!} @endif
         </div>
         <div class="row d-flex justify-content-center">
             <p class="text-muted">Nicholas K Music | All Rights Reserved | {{date("Y")}}</p>
