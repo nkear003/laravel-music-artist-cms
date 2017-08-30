@@ -9,6 +9,8 @@
 Route::get('/', 'PagesController@admin');
 Route::get('/about', 'PagesController@about');
 
+Route::get('/news', 'PagesController@news');
+
 Route::get('/releases', 'PagesController@releases');
 Route::get('/wm', 'PagesController@wm');
 Route::get('/posters', 'PagesController@posters');
