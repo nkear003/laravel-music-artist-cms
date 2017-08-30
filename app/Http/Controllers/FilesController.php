@@ -16,9 +16,9 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $posts = File::orderBy('id', 'desc')->paginate(10);
+        $files = File::orderBy('id', 'desc')->paginate(10);
         
-        return view('files.files')->withPosts($posts);
+        return view('files.files')->withFiles($files);
     }
 
     /**
@@ -94,17 +94,19 @@ class FilesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $file = File::find($id);
+        
+        $file->delete();
+        
+        Session::flash('success', 'File successfully deleted.');
+        
+        return redirect()->route('files.index');
     }
     
-    public function download($path)
-    {
-        return response()->download($path);
-    }
     public function getDownload($id)
     {
         
-        $file = File::where('id', $id)->first();
+        $file = File::find($id);
         
         $path = storage_path() . $file->path;
         $headers = ['Content-Type' => 'application/octet-stream'];
