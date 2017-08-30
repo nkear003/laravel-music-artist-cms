@@ -23,31 +23,29 @@
             <thead>
                 <th>#</th>
                 <th>Title</th>
-                <th>Image</th>
+                <th>Preview</th>
                 <th>Category</th>
                 <th>Created</th>
                 <th></th>
             </thead>
             
             <tbody>
-                @foreach($posts as $post)
+                @foreach($files as $file)
                 
                     <tr>
-                        <th scope="row">{{$post->id}}</th>
+                        <th scope="row">{{$file->id}}</th>
                         <!--title-->
-                        <td>{{$post->title}}</td>
+                        <td>{{$file->title}}</td>
                         <!--img-->
-                        <td><img src="{{asset($post->path)}}" class="img-thumbnail img-fluid thumb"></td>
+                        <td><img src="{{asset($file->path)}}" class="img-thumbnail img-fluid thumb"></td>
                         <!--category-->
-                        <td>{{$post->category->name}}</td>
+                        <td>{{$file->category->name}}</td>
                         <!--created at-->
-                        <td>{{date('M j, Y', strtotime($post->created_at))}}</td>
+                        <td>{{date('M j, Y', strtotime($file->created_at))}}</td>
                         <td>
                             <div class="btn-group-vertical btn-group-sm">
-                                <a href="{{route('files.show', $post->slug)}}" class="btn btn-primary">View</a>
-                                <a href="{{route('files.edit', $post->slug)}}" class="btn btn-success">Edit</a>
                                 
-                                {!! Form::open(['route' => ['files.destroy', $post->id], 'method' 
+                                {!! Form::open(['route' => ['files.destroy', $file->id], 'method' 
                                 => 'DELETE' ]) !!}
                                     
                                 {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger btn-block']) !!}
