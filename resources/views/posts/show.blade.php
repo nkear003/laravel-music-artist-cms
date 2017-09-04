@@ -8,17 +8,12 @@
 <div class="row mb-3 d-flex justify-content-end">
     <div class="card">
         <div class="card-block">
-            <div class="btn-group" id="edit_buttons_box">    
+            <div class="btn-group" id="edit_buttons_box">
                 <!--<button type="button" class="btn btn-default" id="hide__edit_buttons_box">Hide</button>-->
-
                 {!! Html::linkRoute('posts.edit', 'Edit', array($post->slug), array('class' => 'btn btn-primary')) !!}
-
                 {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete'] ) !!}
-
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-
                 {!! Form::close() !!}
-
                 <a href="{{route('posts.index')}}" class="btn btn-default">All Posts</a>
             </div>
         </div>
@@ -31,7 +26,7 @@
 <!--main content-->
 <div class="row" id="main-content">
     <!--left side-->
-    <div class="col">  
+    <div class="col">
         <!--img-->
         <img src="{{ asset($post->image->path) }}" alt="">
         <hr>
@@ -63,11 +58,11 @@
         </a>
         @endif
         @if($post->mp3)
-        <a href="{{route('download', ['id' => $post->mp3])}}">
-            <button class="btn btn-primary">MP3</button>     
+        <a href="{{ route('download', ['id' => $post->mp3]) }}">
+            <button class="btn btn-primary">MP3</button>
         </a>
         @endif
-        
+
     </div>
 </div>
 
