@@ -33,8 +33,41 @@ class PagesController extends Controller
     
     
     public function news() {
-        $posts = Post::orderBy('id', 'desc')/*->limit(3)*/->get();
-        return view('pages.news')->withPosts($posts)->withPosts($posts);
+        
+        $wm = File::where('category_id', 3)
+            ->latest()
+            ->value('path');
+        
+        $wm2 = File::where('category_id', 3)
+            ->orderBy('id', 'desc')
+            ->skip(1)
+            ->value('path');
+        
+        $release = File::where('category_id', 1)
+            ->latest()
+            ->value('path');
+        
+        $release2 = File::where('category_id', 1)
+            ->orderBy('id', 'desc')
+            ->skip(1)
+            ->value('path');
+        
+        $poster = File::where('category_id', 4)
+            ->latest()
+            ->value('path');
+        
+        $poster2 = File::where('category_id', 4)
+            ->orderBy('id', 'desc')
+            ->skip(1)
+            ->value('path');
+        
+        return view('pages.news')
+            ->withWm($wm)
+            ->withWm2($wm2)
+            ->withPoster($poster)
+            ->withPoster2($poster2)
+            ->withRelease2($release2)
+            ->withRelease($release);
     }
 
     public function posts() {
