@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', ' | Images')
+@section('title', ' | Files')
 
 @section('content')
 
@@ -11,7 +11,7 @@
     </div>
     <div class="col d-flex justify-content-end">
         <a href="{{ route('files.create') }}">
-            <button class="btn btn-primary">Upload Image</button>
+            <button class="btn btn-primary">Upload File</button>
         </a>
     </div>
 </div>
