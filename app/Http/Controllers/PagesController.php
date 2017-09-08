@@ -8,115 +8,68 @@ use App\File;
 
 class PagesController extends Controller
 {
-    public function index() {
-        return view('pages.home');
+    public function index()
+    {
+      return view('pages.home');
     }
 
-    public function about() {
-        return view('pages.about');
+    public function about()
+    {
+      return view('pages.about');
     }
 
-    public function contact() {
-
-
-
-    }
-
-    public function files() {
-        $files = File::all();
-        return view('pages.files')->withFiles($files);
+    public function contact()
+    {
+      //
     }
 
     public function admin() {
-        return view('pages.admin');
+      return view('pages.admin');
     }
 
 
     public function news() {
 
-
       ////////////////////////////////////////
       // wm
       ////////////////////////////////////////
 
-      $wm = File::where('category_id', 3)
-          ->latest()
-          ->value('path');
-
-      $wm2 = File::where('category_id', 3)
-          ->orderBy('id', 'desc')
-          ->skip(1)
-          ->value('path');
-
-      $wm3 = File::where('category_id', 3)
-          ->orderBy('id', 'desc')
-          ->skip(2)
-          ->value('path');
+      $wms = File::where('category_id', 3)
+        ->orderBy('category_id', 'desc')
+        ->get();
 
       ////////////////////////////////////////
       // releases
       ////////////////////////////////////////
 
-      $release = File::where('category_id', 1)
-          ->latest()
-          ->value('path');
-
-      $release2 = File::where('category_id', 1)
-          ->orderBy('id', 'desc')
-          ->skip(1)
-          ->value('path');
-
-      $release3 = File::where('category_id', 1)
-          ->orderBy('id', 'desc')
-          ->skip(2)
-          ->value('path');
+      $releases = File::where('category_id', 1)
+        ->orderBy('id', 'desc')
+        ->get();
 
       ////////////////////////////////////////
       // posters
       ////////////////////////////////////////
 
-      $poster = File::where('category_id', 4)
-          ->latest()
-          ->value('path');
+      $posters = File::where('category_id', 4)
+        ->orderBy('id', 'desc')
+        ->get();
 
-      $poster2 = File::where('category_id', 4)
-          ->orderBy('id', 'desc')
-          ->skip(1)
-          ->value('path');
+      ////////////////////////////////////////
+      // return
+      ////////////////////////////////////////
 
-      $poster3 = File::where('category_id', 4)
-          ->orderBy('id', 'desc')
-          ->skip(2)
-          ->value('path');
-
-      $weekend_mixtapes = File::where('category_id', 3)
-          ->orderBy('id', 'desc');
-      $allFiles = File::orderBy('created_at', 'desc')->get();
+      $files = File::orderBy('id', 'desc')
+        ->paginate(9);
 
       ////////////////////////////////////////
       // return
       ////////////////////////////////////////
 
       return view('pages.news')
-
-          ->withWeekend_mixtapes($weekend_mixtapes)
-          ->with('allFiles', $allFiles)
-
-          ->withWm($wm)
-          ->withWm2($wm2)
-          ->withWm3($wm3)
-          ->withPoster($poster)
-          ->withPoster2($poster2)
-          ->withPoster3($poster3)
-          ->withRelease($release)
-          ->withRelease2($release2)
-          ->withRelease3($release3);
-    }
-
-    public function posts() {
-        $posts = Post::where('category_id', 2)->orderBy('id', 'desc')->paginate(4);
-
-        return view('pages.posts')->withPosts($posts);
+        ->withWms($wms)
+        ->withPosters($posters)
+        ->withReleases($releases)
+        ->withFiles($files);
     }
 
     public function releases()

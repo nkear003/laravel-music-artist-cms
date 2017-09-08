@@ -4,23 +4,17 @@
 @section('content')
 
 <div class="row">
+    @for($i = 0; $i < count($files) - 1; $i+=3)
+    <hr>
     <div class="col">
-        <img src="{{asset($wm)}}" class="rounded-circle mb-3">
-        <img src="{{asset($poster)}}" class="mb-3">
+      <img src="{{asset($files[$i]->path)}}"
+        class="{{ $files[$i]->category_id == 3 ? 'rounded-circle' : ''}} mb-3">
+      <img src="{{asset($files[$i+1]->path)}}"
+        class="{{ $files[$i+1]->category_id == 3 ? 'rounded-circle' : ''}} mb-3">
+      <img src="{{asset($files[$i+2]->path)}}"
+        class="{{ $files[$i+2]->category_id == 3 ? 'rounded-circle' : ''}} mb-3">
     </div>
-    <div class="col">
-        <img src="{{asset($wm2)}}" class="rounded-circle mb-3">
-        <img src="{{asset($release)}}" class="mb-3">
-        <img src="{{asset($wm3)}}" class="rounded-circle mb-3">
-    </div>
-    <div class="col">
-        <img src="{{asset($release)}}" class="mb-3">
-        <img src="{{asset($poster2)}}" class="mb-3">
-    </div>
-    <div class="col">
-        <img src="{{asset($poster)}}" class="mb-3">
-        <img src="{{asset($release2)}}" class="mb-3">
-    </div>
+    @endfor
 </div>
 
 @endsection
