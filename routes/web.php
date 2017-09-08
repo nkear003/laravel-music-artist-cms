@@ -6,10 +6,10 @@
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', 'PagesController@admin');
+Route::get('/admin', 'PagesController@admin');
 Route::get('/about', 'PagesController@about');
 
-Route::get('/news', 'PagesController@news');
+Route::get('/', 'PagesController@news');
 
 Route::get('/releases', 'PagesController@releases');
 Route::get('/wm', 'PagesController@wm');

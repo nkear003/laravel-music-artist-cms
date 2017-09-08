@@ -15,10 +15,10 @@ class File extends Model
         return $this->belongsTo('App\Category');
     }
     
-    public $img_id = null;
-    public $wav_path = null;
-    public $mp3_path = null;
-    public $cat_id = null;
+    private $img_id = null;
+    private $wav_path = null;
+    private $mp3_path = null;
+    private $cat_id = null;
     
     public function processFiles($request) 
     {
