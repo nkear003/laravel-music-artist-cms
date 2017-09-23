@@ -17,8 +17,8 @@ class FilesController extends Controller
     public function index()
     {
         $files = File::orderBy('id', 'desc')->paginate(10);
-        
-        return view('files.files')->withFiles($files);
+
+        return view('files.index')->withFiles($files);
     }
 
     /**
@@ -28,7 +28,7 @@ class FilesController extends Controller
       */
     public function create()
     {
-        return view('files.upload');
+        return view('files.create');
     }
 
     /**
@@ -39,17 +39,15 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        
-        // change the $test variable name
         $file = new File;
-        
+
         $file->processFiles($request);
-        
+
         // success message
         Session::flash('success', 'The form was successfully submitted.');
 
         // ...& redirect
-        return redirect()->route('files.index');    
+        return redirect()->route('files.index');
     }
 
     /**
@@ -95,24 +93,24 @@ class FilesController extends Controller
     public function destroy($id)
     {
         $file = File::find($id);
-        
+
         $file->delete();
-        
+
         Session::flash('success', 'File successfully deleted.');
-        
+
         return redirect()->route('files.index');
     }
-    
+
     public function getDownload($id)
     {
-        
+
         $file = File::find($id);
-        
+
         $path = storage_path() . $file->path;
         $headers = ['Content-Type' => 'application/octet-stream'];
 
         return response()->download($path, $file->title, $headers);
-        
+
     }
-    
+
 }
