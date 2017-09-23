@@ -14,7 +14,7 @@ class AddPostIdToFiles extends Migration
     public function up()
     {
         Schema::table('files', function (Blueprint $table) {
-            // $table->integer
+            $table->integer('post_id')->unsigned();
         });
     }
 
@@ -26,7 +26,7 @@ class AddPostIdToFiles extends Migration
     public function down()
     {
         Schema::table('files', function (Blueprint $table) {
-            //
+            $table->dropColumn('post_id');
         });
     }
 }
