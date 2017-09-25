@@ -75,12 +75,7 @@ class ReleasesController extends Controller
     public function show($slug)
     {
         $release = Release::where('slug', $slug)->first();
-
-        $image = $release->image()->where('type', 'image')->first();
-
-        return view('releases.show')
-            ->withRelease($release)
-            ->withImage($image);
+        return view('releases.show')->withRelease($release);
     }
 
     /**

@@ -27,7 +27,7 @@
     <!--left side-->
     <div class="col">
         <!--img-->
-        <img src="{{ asset($image->path) }}" alt="">
+        @if(!empty($release->image_id))<img src="{{ asset($release) }}" alt="">@endif
         <hr>
         <!--info-->
         <ul>
