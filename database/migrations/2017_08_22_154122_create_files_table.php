@@ -20,7 +20,6 @@ class CreateFilesTable extends Migration
             $table->string('type')->nullable();
             $table->string('path')->nullable();
             $table->integer('category_id')->unsigned()->nullable()->default(5);
-            $table->integer('release_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

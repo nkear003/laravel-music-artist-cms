@@ -15,10 +15,6 @@ class File extends Model
     {
         return $this->belongsTo('App\Category');
     }
-    public function release()
-    {
-        return $this->belongsTo('App\Release');
-    }
     public static function process($request)
     {
         // label forum request

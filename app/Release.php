@@ -16,7 +16,7 @@ class Release extends Model
     }
     public function image()
     {
-        return $this->hasOne('App\File');
+        return $this->belongsTo('App\File');
     }
     public static function process($request, $global_vars)
     {

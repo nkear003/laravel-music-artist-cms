@@ -27,7 +27,7 @@
     <!--left side-->
     <div class="col">
         <!--img-->
-        @if(!empty($release->image_id))<img src="{{ asset($release) }}" alt="">@endif
+        @if(!empty($release->image_id))<img src="{{ asset($release->image->path) }}" alt="">@endif
         <hr>
         <!--info-->
         <ul>
@@ -51,13 +51,13 @@
         <hr>
         <h2>Download</h2>
         @endif
-        @if($release->wav)
-        <a href="{{ route('download', ['id' => $release->wav]) }}">
+        @if($release->wav_id)
+        <a href="{{ route('download', ['id' => $release->wav_id]) }}">
             <button class="btn btn-primary">WAV</button>
         </a>
         @endif
-        @if($release->mp3)
-        <a href="{{ route('download', ['id' => $release->mp3]) }}">
+        @if($release->mp3_id)
+        <a href="{{ route('download', ['id' => $release->mp3_id]) }}">
             <button class="btn btn-primary">MP3</button>
         </a>
         @endif
