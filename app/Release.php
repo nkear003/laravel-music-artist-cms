@@ -30,7 +30,6 @@ class Release extends Model
         $release->category_id = 1;
         $release->soundcloud_id = $request->soundcloud_id;
 
-
         $release->title = $request->title;
         $release->body = $request->body;
         $release->slug = str_slug($release->title, '-');
