@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Release;
 use App\File;
+use App\Category;
 
 class PagesController extends Controller
 {
@@ -23,12 +24,13 @@ class PagesController extends Controller
       //
     }
 
-    public function admin() {
+    public function admin()
+    {
       return view('pages.admin');
     }
 
-    public function news() {
-
+    public function news()
+    {
         ////////////////////////////////////////
         // releases
         ////////////////////////////////////////

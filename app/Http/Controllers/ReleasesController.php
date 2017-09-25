@@ -54,9 +54,10 @@ class ReleasesController extends Controller
         ));
 
         // process files function & get returned img, mp3, wav ids
-        $global_vars = File::process($request);
+        // $global_vars = File::process($request);
 
         // process release
+        // $release = Release::process($request, $global_vars);
         $release = Release::process($request, $global_vars);
 
         // success message
