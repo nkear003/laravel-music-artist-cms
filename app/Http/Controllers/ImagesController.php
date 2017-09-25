@@ -18,9 +18,9 @@ class ImagesController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        $releases = Release::orderBy('id', 'desc')->paginate(10);
         
-        return view('pages.releases')->withPosts($posts);
+        return view('pages.releases')->withReleases($releases);
     }
 
     /**
@@ -53,7 +53,7 @@ class ImagesController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
             
             // determine what category the image is
-            // 1 = Release, 2 = Post, 3 = WM, 4 = Poster
+            // 1 = Release, 2 = Release, 3 = WM, 4 = Releaseer
             if ($request->wm) {
                 $location = public_path('storage/images/wm/' . $filename);
                 $path = 'storage/images/wm/' . $filename;
@@ -77,8 +77,8 @@ class ImagesController extends Controller
             })->save($location);
             
             // set post parameters
-            $post->image = $filename;
-            $post->image_id = $img->id;
+            $release->image = $filename;
+            $release->image_id = $img->id;
             
             // set image parameters
             $img->path = $path;
@@ -95,7 +95,7 @@ class ImagesController extends Controller
             $filename = $wav->getOriginalClientName();
             $location = 
             
-            $post->wav = $filename;
+            $release->wav = $filename;
         }
         
         // process mp3 zip if exists
@@ -105,7 +105,7 @@ class ImagesController extends Controller
             $mp3->origName = $mp3->getClientOriginalName();
             $mp3->title = $mp3->origName;
 
-            $post->mp3 = $mp3->title;
+            $release->mp3 = $mp3->title;
 
             Storage::disk('local')->putFileAs('zips', $mp3, $mp3->title);
 

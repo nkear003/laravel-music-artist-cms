@@ -3,8 +3,10 @@
 {{ Form::file('images[]', array('class' => 'input-group form-control-file', 'multiple' => 'multiple')) }}
 
 <!--Image Type-->
+<small id="fileHelp" class="form-text text-muted">Categories</small>
+{{ Form::checkbox('release') }} Cover Art <br>
 {{ Form::checkbox('wm') }} WM <br>
-{{ Form::checkbox('poster') }} Poster
+{{ Form::checkbox('poster') }} Releaseer
 <small id="fileHelp" class="form-text text-muted">Upload image.</small>
 
 <!--wav-->

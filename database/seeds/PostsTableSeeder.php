@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PostsTableSeeder extends Seeder
+class ReleasesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +11,8 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {   
-        factory(App\Post::class, 20)->create()->make();
-/*        DB::table('posts')->insert([
+        factory(App\Release::class, 20)->create()->make();
+/*        DB::table('releases')->insert([
             'name' => '',
             'released' => '',
             'genre' => '',

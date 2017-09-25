@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', ' | Create New Post')
+@section('title', ' | Create New Release')
 
 @section('css')
 
@@ -13,7 +13,7 @@
 <div class="row">
     <div class="offset-2 col-8">
     
-        <h1 class>Create New Post</h1>
+        <h1 class>Create New Release</h1>
 
         <hr>
 

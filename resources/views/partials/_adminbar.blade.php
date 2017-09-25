@@ -8,10 +8,10 @@
         <div class="navbar-nav">
             <div class="nav-item"><a href="{{url('/')}}" class="nav-link {{ Request::is('admin') ? "active" : "" }}">Home</a></div> 
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Posts</a>
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
                 <div class="dropdown-menu">
-                    <a href="{{route('posts.create')}}" class="dropdown-item">Create Post</a>
-                    <a href="{{url('/posts')}}" class="dropdown-item">Posts Index</a>
+                    <a href="{{route('releases.create')}}" class="dropdown-item">Create Release</a>
+                    <a href="{{url('/releases')}}" class="dropdown-item">Releases Index</a>
                 </div>   
             </div>
             <div class="nav-item dropdown">
@@ -25,7 +25,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item {{ Request::is('releases') ? "active" : "" }}" href="{{url('/releases')}}">Releases</a>
-                    <a class="dropdown-item {{ Request::is('posters') ? "active" : ""}}" href="{{url('/posters')}}">Posters</a>
+                    <a class="dropdown-item {{ Request::is('posters') ? "active" : ""}}" href="{{url('/posters')}}">Releases</a>
                     <a class="dropdown-item {{ Request::is('wm') ? "active" : ""}}" href="{{url('/wm')}}">WM</a>
                 </div>
             </div>

@@ -9,7 +9,7 @@
 <!--content-->
 <div class="row">
     <div class="col">
-        <a href="{{route('posts.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">Create New Post</a>
+        <a href="{{route('releases.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">Create New Release</a>
     </div>
     <div class="col">
         <a href="{{route('files.create')}}" class="btn btn-primary btn-block btn-lg pb-5 pt-5">Upload File</a>

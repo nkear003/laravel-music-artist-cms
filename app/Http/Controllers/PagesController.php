@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Release;
 use App\File;
 
 class PagesController extends Controller
@@ -27,70 +27,69 @@ class PagesController extends Controller
       return view('pages.admin');
     }
 
-
     public function news() {
 
-      ////////////////////////////////////////
-      // wm
-      ////////////////////////////////////////
+        ////////////////////////////////////////
+        // releases
+        ////////////////////////////////////////
 
-      $wms = File::where('category_id', 3)
+        $releases = File::where('category_id', 2)
+        ->orderBy('id', 'desc')
+        ->get();
+
+        ////////////////////////////////////////
+        // wm
+        ////////////////////////////////////////
+
+        $wms = File::where('category_id', 3)
         ->orderBy('category_id', 'desc')
         ->get();
 
-      ////////////////////////////////////////
-      // releases
-      ////////////////////////////////////////
+        ////////////////////////////////////////
+        // posters
+        ////////////////////////////////////////
 
-      $releases = File::where('category_id', 1)
+        $posters = File::where('category_id', 4)
         ->orderBy('id', 'desc')
         ->get();
 
-      ////////////////////////////////////////
-      // posters
-      ////////////////////////////////////////
+        ////////////////////////////////////////
+        // files
+        ////////////////////////////////////////
 
-      $posters = File::where('category_id', 4)
-        ->orderBy('id', 'desc')
-        ->get();
-
-      ////////////////////////////////////////
-      // return
-      ////////////////////////////////////////
-
-      $files = File::orderBy('id', 'desc')
+        $files = File::orderBy('id', 'desc')
         ->paginate(9);
 
-      ////////////////////////////////////////
-      // return
-      ////////////////////////////////////////
+        ////////////////////////////////////////
+        // return
+        ////////////////////////////////////////
 
-      return view('pages.news')
+        return view('pages.news')
         ->withWms($wms)
-        ->withPosters($posters)
         ->withReleases($releases)
+        ->withPosters($posters)
         ->withFiles($files);
     }
 
     public function releases()
     {
-        $posts = Post::where('category_id', 1)->orderBy('id', 'desc')->paginate(4);
+        $releases = Release::where('category_id', 2)->orderBy('id', 'desc')->paginate(4);
 
-        return view('pages.releases')->withPosts($posts);
+        return view('pages.releases')->withReleases($releases);
     }
 
     public function wm() {
 
-        $posts = File::where('category_id', 3)->orderBy('id', 'desc')->paginate(9);
+        $releases = File::where('category_id', 3)->orderBy('id', 'desc')->paginate(9);
 
-        return view('pages.wm')->withPosts($posts);
+        return view('pages.wm')->withReleases($releases);
     }
 
     public function posters() {
 
-        $posts = File::where('category_id', 4)->orderBy('id', 'desc')->paginate(8);
+        $releases = File::where('category_id', 4)->orderBy('id', 'desc')->paginate(8);
 
-        return view('pages.posters')->withPosts($posts);
+        return view('pages.posters')->withReleases($releases);
     }
 
     public function home()

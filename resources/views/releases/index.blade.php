@@ -1,17 +1,17 @@
 @extends('main')
 
-@section('title', ' | posts')
+@section('title', ' | releases')
 
 @section('content')
 
 <!--title-->
 <div class="row mb-1">
     <div class="col">
-        <h1>All posts</h1>
+        <h1>All releases</h1>
     </div>
     <div class="col d-flex justify-content-end">
-        <a href="{{ route('posts.create') }}">
-            <button class="btn btn-primary">New Post</button>
+        <a href="{{ route('releases.create') }}">
+            <button class="btn btn-primary">New Release</button>
         </a>
     </div>
 </div>
@@ -33,26 +33,26 @@
             </thead>
             
             <tbody>
-                @foreach($posts as $post)
+                @foreach($releases as $release)
                 
                     <tr>
-                        <th scope="row">{{$post->id}}</th>
-                        <td><a href="{{route('posts.show', $post->slug)}}">{{$post->title}}</a></td>
-                        <td><img src="{{asset($post->image->path)}}" class="img-thumbnail img-fluid thumb"></td>
+                        <th scope="row">{{$release->id}}</th>
+                        <td><a href="{{route('releases.show', $release->slug)}}">{{$release->title}}</a></td>
+                        <td><img src="{{asset($release->image->path)}}" class="img-thumbnail img-fluid thumb"></td>
                         <td>
-                            {{substr($post->description, 0, 50)}}
-                            {{ (strlen($post->description) > 50 ? "..." : "") }}
+                            {{substr($release->description, 0, 50)}}
+                            {{ (strlen($release->description) > 50 ? "..." : "") }}
                         </td>
-                        <td>{{date('M j, Y', strtotime($post->released))}}</td>
-                        <td>{{$post->slug}}</td>
-                        <td>{{$post->category->name}}</td>
-                        <td>{{date('M j, Y', strtotime($post->created_at))}}</td>
+                        <td>{{date('M j, Y', strtotime($release->released))}}</td>
+                        <td>{{$release->slug}}</td>
+                        <td>{{$release->category->name}}</td>
+                        <td>{{date('M j, Y', strtotime($release->created_at))}}</td>
                         <td>
                             <div class="btn-group-vertical btn-group-sm">
-                                <a href="{{route('posts.show', $post->slug)}}" class="btn btn-primary">View</a>
-                                <a href="{{route('posts.edit', $post->slug)}}" class="btn btn-success">Edit</a>
+                                <a href="{{route('releases.show', $release->slug)}}" class="btn btn-primary">View</a>
+                                <a href="{{route('releases.edit', $release->slug)}}" class="btn btn-success">Edit</a>
                                 
-                                {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' 
+                                {!! Form::open(['route' => ['releases.destroy', $release->id], 'method' 
                                 => 'DELETE' ]) !!}
                                     
                                 {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger btn-block']) !!}
@@ -66,6 +66,6 @@
             </tbody>
         </table>
     </div>
-</div> <!--end posts <row></row>-->
+</div> <!--end releases <row></row>-->
 
 @endsection

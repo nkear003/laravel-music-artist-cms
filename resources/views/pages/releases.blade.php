@@ -10,10 +10,10 @@
     
 <div class="row">
     
-    @for($i = 0; $i < count($posts); $i++)
+    @for($i = 0; $i < count($releases); $i++)
     <div class="col">
-        <a href="{{route('posts.show', $posts[$i]->slug)}}">
-            <img class="img-fluid img-thumbnail" src="{{$posts[$i]->image->path}}" alt="{{$posts[$i]->image->title}}">
+        <a href="{{route('releases.show', $releases[$i]->slug)}}">
+            <img class="img-fluid img-thumbnail" src="{{$releases[$i]->image->path}}" alt="{{$releases[$i]->image->title}}">
         </a>
     </div>    
     @if( $i > 0 && ($i == 1 || $i % 3 == 0))

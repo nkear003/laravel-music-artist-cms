@@ -2,12 +2,12 @@
     <!--left side-->
     <div class="col">  
         <!--img-->
-        <img src="{{ asset($post->path) }}" alt="{{ $post->image }}">
+        <img src="{{ asset($release->path) }}" alt="{{ $release->image }}">
         <hr>
         <!--description-->
-        @if($post->body)
+        @if($release->body)
         <hr>
-        <p class="lead">{{$post->description}}</p>
+        <p class="lead">{{$release->description}}</p>
         @endif
     </div>
 </div>

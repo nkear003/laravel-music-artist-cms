@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', ' | Create New Post')
+@section('title', ' | Create New Release')
 
 @section('css')
 
@@ -12,19 +12,17 @@
 
 <div class="row">
     <div class="offset-2 col-8">
-    
-        <h1 class>Create New Post</h1>
+
+        <h1 class>Create New Release</h1>
 
         <hr>
 
-        {!! Form::open(['route' => 'posts.store', 'files' => 'true', 'data-parsley-validate' => '']) !!}
-            
+        {!! Form::open(['route' => 'releases.store', 'files' => 'true', 'data-parsley-validate' => '']) !!}
+
             <!--title-->
             {{ Form::label('title', 'Title:') }}
             {{ Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '256') ) }}
-            
-            
-                
+
             <!--description-->
             {{ Form::label('body', 'Body:') }}
             {{ Form::textarea('body', null, array('class' => 'form-control') ) }}
@@ -40,15 +38,14 @@
             <!--soundcloud id-->
             {{ Form::label('soundcloud_id', 'Soundcloud Playlist ID:') }}
             {{ Form::text('soundcloud_id', 72530870, array('class' => 'form-control', 'required' => '')) }}
-                
 
             @include('partials._fileupload')
-            
+
             <!--submit-->
-            {{ Form::submit('Create Post', array('class' => 'btn btn-primary btn-lg btn-block margin-top mt-3')) }}
+            {{ Form::submit('Create Release', array('class' => 'btn btn-primary btn-lg btn-block margin-top mt-3')) }}
 
         {!! Form::close() !!}
-    
+
     </div>
 </div>
 

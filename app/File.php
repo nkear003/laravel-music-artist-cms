@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Image;
 use Storage;
+use App\Utility;
 
 class File extends Model
 {
@@ -14,127 +15,109 @@ class File extends Model
     {
         return $this->belongsTo('App\Category');
     }
-
-    private $img_id = null;
-    private $wav_path = null;
-    private $mp3_path = null;
-    private $cat_id = null;
-
-    public function processFiles($request)
+    public function release()
     {
+        return $this->belongsTo('App\Release');
+    }
+    public static function process($request)
+    {
+        // label forum request
+        $file = $request;
 
-        $post_title = $request->title;
+        // global vars
+        $global_vars = [
+            'img_id' => [],
+            'wav_id' => '',
+            'mp3_id' => ''
+        ];
 
-        // process image, if exists
-        if ($request->hasFile('images')) {
-
-            $images = $request->images;
-
+        // if exists in request...
+        if ($file->hasFile('images')) // process & save image
+        {
+            $images = $file->images;
             foreach($images as $image) {
 
-                //create new images obj
-                $img = new File;
+                $file_meta = new File;
 
-                // set files name and type
-                $filename = time() . '.' . $image->getClientOriginalName();
-                $type = 'image';
-
-                // determine what category the image is
-                // 1 = Release, 2 = Post, 3 = WM, 4 = Poster
-                if ($request->wm) {
-                    $location = public_path('storage/images/wm/' . $filename);
-                    $path = 'storage/images/wm/' . $filename;
-                    $cat_id = 3;
-                }
-                else if ($request->poster) {
-                    $location = public_path('storage/images/posters/' . $filename);
-                    $path = 'storage/images/posters/' . $filename;
-                    $cat_id = 4;
-                }
-                else {
-                    $location = public_path('storage/images/' . $filename);
-                    $path = 'storage/images/' . $filename;
-                    $cat_id = 1;
+                // set image data
+                $filename = $image->getClientOriginalName();
+                // 1 = Release, 2 = Release, 3 = WM, 4 = Releaseer
+                if($file->release) {
+                    $file_meta->category_id = 2;
+                    $file_meta->path = 'storage/images/releases' . $filename;
+                } else if ($file->wm) {
+                    $file_meta->category_id = 3;
+                    $file_meta->path = 'storage/images/wm/' . $filename;
+                } else if ($file->poster) {
+                    $file_meta->category_id = 4;
+                    $file_meta->path = 'storage/images/posters/' . $filename;
+                } else {
+                    $file_meta->category_id = 1;
+                    $file_meta->path = 'storage/images/' . $filename;
                 }
 
                 // resize and save the image
                 Image::make($image)->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();
-                })->save($location);
+                })->save($file_meta->path);
 
                 // set file parameters for DB
-                $img->path = $path;
-                $img->title = $image->getClientOriginalName();
-                $img->category_id = $cat_id;
-                $img->type = $type;
+                $file_meta->title = $filename;
+                $file_meta->type = 'image';
 
-                // save file to table
-                $img->save();
+                // save to database
+                $file_meta->save();
 
+                // global vars
+                $global_vars['img_id'][] = $file_meta['id'];
             }
-
-            $this->img_id = $img->id;
-            $this->cat_id = $cat_id;
-
         }
-
-        // process WAV zip if exists
-        if ($request->hasFile('wav')) {
-
-            // create new file object
-            $wav = new File;
-
-            // data for the file
-            $file = $request->file('wav');
-            $filename = $file->getClientOriginalName();
-
+        if ($file->hasFile('wav')) // process & save WAV zip
+        {
+            // new File instance
+            $file_meta = new File();
             // store the file
-            Storage::disk('local')->putFileAs('zips', $file, $filename);
-
+            $filename = $file['wav']->getClientOriginalName();
+            Storage::disk('local')->putFileAs('zips', $file->file('wav'), $filename);
 
             // set data for DB
-            $wav->type = 'zip';
-            $wav->path = '/app/zips/' . $filename;
-            $wav->category_id = 5; // 5 is no category
-            $wav->title = $post_title . '_wav';
+            $file_meta->type = 'zip';
+            $file_meta->path = '/app/zips/' . $filename;
+            $file_meta->category_id = 1;
+            $file_meta->title = $filename;
 
-            // save to DB
-            $wav->save();
+            // save to database
+            $file_meta->save();
 
-            // set global vars
-            $this->wav_path = $wav->id;
+            // save global variables
+            $global_vars['wav_id'] = $file_meta['id'];
         }
-
-        // process mp3 zip if exists
-        if ($request->hasFile('mp3')) {
-
-            // create new file object
-            $mp3 = new File;
-
-            // set metadata for file
-            $file = $request->file('mp3');
-            $filename = $file->getClientOriginalName();
+        if ($file->hasFile('mp3')) // process & save mp3 zip
+        {
+            // new File instance
+            $file_meta = new File;
 
             // store the file
-            Storage::disk('local')->putFileAs('zips', $file, $filename);
+            $filename = $file['mp3']->getClientOriginalName();
+            Storage::disk('local')->putFileAs('zips', $file->file('mp3'), $filename);
 
             //set data for DB
-            $mp3->type = 'zip';
-            $mp3->path = '/app/zips/' . $filename;
-            $mp3->category_id = 5; // 5 is no category
-            $mp3->title = $post_title . '_mp3';
+            $file_meta->type = 'zip';
+            $file_meta->path = '/app/zips/' . $filename;
+            $file_meta->category_id = 1;
+            $file_meta->title = $filename;
 
-            //save to DB
-            $mp3->save();
+            // save to database
+            $file_meta->save();
 
-            // set global variables
-            $this->mp3_path = $mp3->id;
+            // save global variables
+            $global_vars['mp3_id'] = $file_meta['id'];
         }
 
+        return $global_vars;
     }
-
     // returns the file object
-    public function getVars() {
+    public function getFileObject() {
         return $this;
     }
 

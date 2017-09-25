@@ -18,8 +18,9 @@ class CreateFilesTable extends Migration
             $table->boolean('is_featured')->default(false);
             $table->string('title')->nullable();
             $table->string('type')->nullable();
-            $table->string('path');
-            $table->string('category_id')->nullable();
+            $table->string('path')->nullable();
+            $table->integer('category_id')->unsigned()->nullable()->default(5);
+            $table->integer('release_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

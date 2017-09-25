@@ -11,24 +11,9 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
-            'name' => 'Release',
-        ]);
-        
-        DB::table('categories')->insert([
-            'name' => 'Post',
-        ]);
-           
-        DB::table('categories')->insert([
-            'name' => 'WM',
-        ]);
-        
-        DB::table('categories')->insert([
-            'name' => 'Poster',
-        ]);
-        
-        DB::table('categories')->insert([
-            'name' => '',
-        ]);
+        DB::table('categories')->insert(['name' => 'Uncategorized']);
+        DB::table('categories')->insert(['name' => 'Release']);
+        DB::table('categories')->insert(['name' => 'WM']);
+        DB::table('categories')->insert(['name' => 'Releaseer']);
     }
 }

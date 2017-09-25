@@ -23,7 +23,7 @@
 //    ];
 //});
 
-$factory->define(App\Post::class, function (Faker\Generator $faker) {
+$factory->define(App\Release::class, function (Faker\Generator $faker) {
 
     $title = $faker->sentence(3);
     $slug = str_slug($title);

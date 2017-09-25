@@ -14,16 +14,16 @@ Route::get('/', 'PagesController@news');
 Route::get('/releases', 'PagesController@releases');
 Route::get('/wm', 'PagesController@wm');
 Route::get('/posters', 'PagesController@posters');
-Route::get('/allposts', 'PagesController@posts');
+Route::get('/allreleases', 'PagesController@releases');
 
 
 /*
 |--------------------------------------------------------------------------
-| Posts Routes
+| Releases Routes
 |--------------------------------------------------------------------------
 */
 
-Route::resource('posts', 'PostsController');
+Route::resource('releases', 'ReleasesController');
 
 /*
 |--------------------------------------------------------------------------

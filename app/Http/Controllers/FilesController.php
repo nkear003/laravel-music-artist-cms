@@ -39,9 +39,7 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        $file = new File;
-
-        $file->processFiles($request);
+        File::process($request);
 
         // success message
         Session::flash('success', 'The form was successfully submitted.');
