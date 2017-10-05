@@ -1,12 +1,7 @@
 /* Layout
 ---------------------------------------------*/
-body {
-    padding: 20px 0px;
-}
-
-hr {
-    border-top: 3px solid #E1E1E1;
-}
+body { padding: 20px 0px; }
+hr { border-top: 3px solid #E1E1E1; }
 
 /* Images
 ---------------------------------------------*/
@@ -14,19 +9,14 @@ img {
     max-height:100%;
     max-width:100%;
 }
-
 .post-img { max-height: 500px }
-
 .post { max-height: auto; max-width: 250px }
 .featured { max-height: 600px; max-width: 600px }
-
 .grid-item {
     float: left;
     width: 500px;
     height: auto;
-    
 }
-
 .thumb {
     max-height: 100px;
     max-width: 100px;
@@ -35,13 +25,8 @@ img {
 /* Navbar
 ---------------------------------------------*/
 
-.collapse {
-    display: none !important; /* Center align that will still collapse */
-}
-
-nav {
-    margin-bottom: 20px;
-}
+.collapse { display: none !important; /* Center align that will still collapse */}
+nav { margin-bottom: 20px; }
 
 /* other
 ---------------------------------------------*/
@@ -50,11 +35,6 @@ ul {
     list-style: none;
     padding: 0;
 }
-
-.form-control {
-    margin-bottom: .5rem;
-}
-
-.hide {
-    display: none;
-}
+.form-control { margin-bottom: .5rem; }
+.hide { display: none; }
+.bg-load { background-color: red; }

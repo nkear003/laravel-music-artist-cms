@@ -2,20 +2,23 @@
 
 @section('content')
 
-<div class="row" id="release">
+@include('components.release_latest')
+
+<div id="divider">
     <div class="col">
-        <h2>Latest Release</h2>
+        <hr>
+    </div>
+    <div class="col">
+        <div>
+            <h2>Live</h2>
+        </div>
+    </div>
+    <div class="col">
+        <hr>
     </div>
 </div>
-<div class="row">
-    <div class="col">
-        <a href="{{route('releases.show', $release->slug)}}">
-            <img src="{{asset($release->image->path)}}" alt={{$release->title}}>
-        </a>
-    </div>
-    <div class="col">
-        @include('releases._soundcloud')
-    </div>
+<div id="live">
+
 </div>
 
 @endsection
