@@ -1,10 +1,5 @@
 <div id="release">
     <div class="row">
-        {{-- <div class="col">
-            <h2>Latest Release</h2>
-        </div> --}}
-    </div>
-    <div class="row">
         <div class="col">
             <div class="overlay">
                 <a href="{{route('releases.show', $release->slug)}}">

@@ -39,10 +39,6 @@ ul {
 .hide { display: none; }
 /*.bg-load { background-color: red; }*/
 .bg-load { background: url('loader2.gif') no-repeat center; }
-
-img {
-  /* You can't do anything here */
-}
 .overlay {
   position: relative;
   display: inline-block;
@@ -52,7 +48,8 @@ img {
   display: none;
   top: 0;
   bottom: 0;
-  width:100%;
+  width: 100%;
   background: rgba(0, 0, 0, .6);
 }
+.overlay-content h3 { padding-top: 33%; }
 .overlay:hover .overlay-content { display: inline-block; }
