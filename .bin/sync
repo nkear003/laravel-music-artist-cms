@@ -1,0 +1,4 @@
+rsync -avhz -e 'ssh -p 2222' --delete
+--progress --exclude-from='/Volumes/Macintosh HD/nicholas/root/.exclude.txt'
+--exclude-from='/Volumes/Macintosh HD/nicholas/root/nkmusic_laravel/.exclude.txt'
+~/root/nkmusic_laravel/ nichol69@biz183.inmotionhosting.com:~/staging.nkmusik.com

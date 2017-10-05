@@ -10,16 +10,17 @@
 <div class="row mb-3 d-flex justify-content-end">
     <div class="card">
         <div class="card-block">
-            <div class="btn-group" id="edit_buttons_box">    
+            <div class="btn-group" id="edit_buttons_box">
                 <!--<button type="button" class="btn btn-default" id="hide__edit_buttons_box">Hide</button>-->
-                
+
                 {!! Html::linkRoute('releases.show', 'Cancel', array($release->slug), ['class' => 'btn btn-danger']) !!}
 
                 {!! Form::open(['route' => ['releases.destroy', $release->id], 'method' => 'delete'] ) !!}
 
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                    {{ Form::submit('Update Release', ['class' => 'btn btn-success']) }}
 
                 {!! Form::close() !!}
+
 
                 <a href="{{route('releases.index')}}" class="btn btn-default">All Releases</a>
             </div>
@@ -31,12 +32,6 @@
 <div class="row mb-3">
     <div class="col">
        <h1>{{ Form::text('title', null) }}</h1>
-    </div>
-    <div class="col">
-        <div class="btn-group d-flex justify-content-end">
-            {!! Html::linkRoute('releases.show', 'Cancel', array($release->slug), ['class' => 'btn btn-danger']) !!}
-            {{ Form::submit('Update Release', ['class' => 'btn btn-success']) }}
-        </div>
     </div>
 </div>
 
@@ -76,8 +71,8 @@
         @endif
         @if($release->mp3)
         <a href="{{ asset('storage/zips/' . $release->mp3) }}">
-            <button class="btn btn-primary">MP3</button>     
-        </a>    
+            <button class="btn btn-primary">MP3</button>
+        </a>
         @elseif(!$release->mp3)
         {{ Form::file('mp3', array('class' => 'input-group form-control-file')) }}
         <small id="fileHelp" class="form-text text-muted">Upload MP3 zip.</small>

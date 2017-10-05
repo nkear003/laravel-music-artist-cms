@@ -3,12 +3,12 @@
 @section('title') | {{$release->title}} @endsection
 
 @section('content')
+    
 <!--edit buttons-->
 <div class="row mb-3 d-flex justify-content-end">
     <div class="card">
         <div class="card-block">
             <div class="btn-group" id="edit_buttons_box">
-                <!--<button type="button" class="btn btn-default" id="hide__edit_buttons_box">Hide</button>-->
                 {!! Html::linkRoute('releases.edit', 'Edit', array($release->slug), array('class' => 'btn btn-primary')) !!}
                 {!! Form::open(['route' => ['releases.destroy', $release->id], 'method' => 'delete'] ) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
@@ -18,10 +18,12 @@
         </div>
     </div>
 </div>
+
 <!--title-->
 <div class="row">
     <div class="col"><h1>{{$release->title}}</h1></div>
 </div>
+
 <!--main content-->
 <div class="row" id="main-content">
     <!--left side-->

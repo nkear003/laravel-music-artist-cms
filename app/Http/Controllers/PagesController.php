@@ -31,46 +31,23 @@ class PagesController extends Controller
 
     public function news()
     {
-        ////////////////////////////////////////
-        // releases
-        ////////////////////////////////////////
-
-        $releases = File::where('category_id', 2)
-        ->orderBy('id', 'desc')
-        ->get();
-
-        ////////////////////////////////////////
-        // wm
-        ////////////////////////////////////////
+        $release = Release::where('category_id', 1)
+            ->latest()
+            ->first();
 
         $wms = File::where('category_id', 3)
-        ->orderBy('category_id', 'desc')
-        ->get();
-
-        ////////////////////////////////////////
-        // posters
-        ////////////////////////////////////////
+            ->orderBy('category_id', 'desc')
+            ->get();
 
         $posters = File::where('category_id', 4)
-        ->orderBy('id', 'desc')
-        ->get();
-
-        ////////////////////////////////////////
-        // files
-        ////////////////////////////////////////
-
-        $files = File::orderBy('id', 'desc')
-        ->paginate(9);
-
-        ////////////////////////////////////////
-        // return
-        ////////////////////////////////////////
+            ->orderBy('id', 'desc')
+            ->limit(3)
+            ->get();
 
         return view('pages.news')
-        ->withWms($wms)
-        ->withReleases($releases)
-        ->withPosters($posters)
-        ->withFiles($files);
+            ->withWms($wms)
+            ->withRelease($release)
+            ->withPosters($posters);
     }
 
     public function releases()
