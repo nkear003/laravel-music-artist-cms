@@ -11,17 +11,8 @@
     <div class="card">
         <div class="card-block">
             <div class="btn-group" id="edit_buttons_box">
-                <!--<button type="button" class="btn btn-default" id="hide__edit_buttons_box">Hide</button>-->
-
                 {!! Html::linkRoute('releases.show', 'Cancel', array($release->slug), ['class' => 'btn btn-danger']) !!}
-
-                {!! Form::open(['route' => ['releases.destroy', $release->id], 'method' => 'delete'] ) !!}
-
-                    {{ Form::submit('Update Release', ['class' => 'btn btn-success']) }}
-
-                {!! Form::close() !!}
-
-
+                {{ Form::submit('Update Release', ['class' => 'btn btn-success']) }}
                 <a href="{{route('releases.index')}}" class="btn btn-default">All Releases</a>
             </div>
         </div>
@@ -40,8 +31,9 @@
     <!--left side-->
     <div class="col">
         <!--img-->
-        <img src="{{ asset('storage/images/' . $release->image) }}" alt="{{ $release->image }}">
-        {{ Form::file('image', ['class' => 'input-group form-control-file']) }}
+        <img src="{{ asset($release->image->path) }}" alt="{{ $release->image }}">
+        {{ Form::file('images[]', array('class' => 'input-group form-control-file', 'multiple' => 'multiple')) }}
+        {{ Form::checkbox('release', 'value', true) }} Cover Art <br>
         <small id="fileHelp" class="form-text text-muted">Replace artwork.</small>
         <hr>
         <!--info-->
@@ -87,9 +79,7 @@
 
 @include('partials._newsletter')
 
-
 @endsection
-
 
 @section('scripts')
 <script src="{{asset('js/parsley.min.js')}}"></script>

@@ -3,9 +3,7 @@
 @section('title', ' | Create New Release')
 
 @section('css')
-
 <link rel="stylesheet" href="{{ URL::asset('css/parsley.css') }}">
-
 @endsection
 
 @section('content')

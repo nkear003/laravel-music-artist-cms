@@ -105,52 +105,25 @@ class ReleasesController extends Controller
     public function update(Request $request, $id)
     {
         // validate the form
-
         $this->validate($request, array(
             'title' => 'required|max:255'
         ));
 
-        // save the data to the database
+        // process files
+        $global_vars = File::process($request);
 
+        // update data to database
         $release = Release::find($id);
 
-        if (!empty($request->image)) {
-
-            $image = $request->image;
-            $image->origName = $image->getClientOriginalName();
-            $image->title = $image->origName;
-
-            $release->image = $image->title;
-
-            Storage::disk('public')->putFileAs('images', $image, $image->title);
-
+        if($global_vars['img_id']) {
+            $release->image_id = $global_vars['img_id'][0];
         }
-
-        if (!empty($request->wav)) {
-
-            $wav = $request->wav;
-            $wav->origName = $wav->getClientOriginalName();
-            $wav->title = $wav->origName;
-
-            $release->wav = $wav->title;
-
-            Storage::disk('public')->putFileAs('zips', $wav, $wav->title);
-
+        if($global_vars['wav_id']) {
+            $release->wav_id = $global_vars['wav_id'];
         }
-
-        if (!empty($request->mp3)) {
-
-            $mp3 = $request->mp3;
-            $mp3->origName = $mp3->getClientOriginalName();
-            $mp3->title = $mp3->origName;
-
-            $release->mp3 = $mp3->title;
-
-            Storage::disk('public')->putFileAs('zips', $mp3, $mp3->title);
-
+        if($global_vars['mp3_id']) {
+            $release->mp3_id = $global_vars['mp3_id'];
         }
-
-
         $release->title = $request->input('title');
         $release->slug = str_slug($release->title, '-');
         $release->body = $request->input('body');

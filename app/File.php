@@ -40,7 +40,7 @@ class File extends Model
                 // 1 = Release, 2 = Release, 3 = WM, 4 = Releaseer
                 if($file->release) {
                     $file_meta->category_id = 2;
-                    $file_meta->path = 'storage/images/releases' . $filename;
+                    $file_meta->path = 'storage/images/cover_art' . $filename;
                 } else if ($file->wm) {
                     $file_meta->category_id = 3;
                     $file_meta->path = 'storage/images/wm/' . $filename;
@@ -65,7 +65,8 @@ class File extends Model
                 $file_meta->save();
 
                 // global vars
-                $global_vars['img_id'][] = $file_meta['id'];
+                array_push($global_vars['img_id'], $file_meta['id']);
+                // $global_vars['img_id'][] = $file_meta['id'];
             }
         }
         if ($file->hasFile('wav')) // process & save WAV zip
