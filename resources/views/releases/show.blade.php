@@ -47,7 +47,7 @@
     </div>
     <!--right side-->
     <div class="col">
-        @include('releases._soundcloud')
+        @include('components._soundcloud')
         <!--downloads-->
         @if($release->wav_id || $release->mp3_id)
         <hr>

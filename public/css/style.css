@@ -6,8 +6,8 @@ hr { border-top: 3px solid #E1E1E1; }
 /* Images
 ---------------------------------------------*/
 img {
-    max-height:100%;
-    max-width:100%;
+    /*max-height:100%;
+    max-width:100%;*/
 }
 .post-img { max-height: 500px }
 .post { max-height: auto; max-width: 250px }
@@ -39,3 +39,30 @@ ul {
 .hide { display: none; }
 /*.bg-load { background-color: red; }*/
 .bg-load { background: url('loader2.gif') no-repeat center; }
+
+img {
+  /* You can't do anything here */
+}
+
+.overlay {
+  position: relative;
+  /*margin: 50px;*/
+  display: inline-block;
+}
+
+.overlay-content {
+  position: absolute;
+  /* This you don't know */
+  /* width: 320px; */
+  /* This you don't know */
+  /* height: 200px; */
+  display: none;
+  top: 0;
+  bottom: 0;
+  width:100%;
+}
+
+.overlay:hover .overlay-content {
+    display: inline-block;
+    background-color: red;
+}

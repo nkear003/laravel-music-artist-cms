@@ -5,13 +5,18 @@
         </div> --}}
     </div>
     <div class="row">
-        <div class="col bg-load">
-            <a href="{{route('releases.show', $release->slug)}}">
-                <img class="bg-load" src="{{asset($release->image->path)}}" alt={{$release->title}}>
-            </a>
+        <div class="col">
+            <div class="overlay">
+                <a href="{{route('releases.show', $release->slug)}}">
+                    <img class="img-fluid bg-load" src="{{asset($release->image->path)}}" alt={{$release->title}}>
+                </a>
+                <div class="overlay-content img-fluid">
+                    Schlagen
+                </div>
+            </div>
         </div>
         <div class="col">
-            @include('releases._soundcloud')
+            @include('components._soundcloud')
         </div>
     </div>
 </div>
