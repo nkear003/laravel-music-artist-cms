@@ -31,7 +31,7 @@ class PagesController extends Controller
 
     public function news()
     {
-        $release = Release::where('category_id', 1)
+        $release = Release::where('category_id', 2)
             ->latest()
             ->first();
 
