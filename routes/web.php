@@ -11,10 +11,10 @@ Route::get('/about', 'PagesController@about');
 
 Route::get('/', 'PagesController@news');
 
-Route::get('/releases', 'PagesController@releases');
 Route::get('/wm', 'PagesController@wm');
 Route::get('/posters', 'PagesController@posters');
-Route::get('/allreleases', 'PagesController@releases');
+
+Route::get('/releasesIndex', 'ReleasesController@releasesIndex');
 
 
 /*
@@ -27,7 +27,7 @@ Route::resource('releases', 'ReleasesController');
 
 /*
 |--------------------------------------------------------------------------
-| Image Routes
+| File Routes
 |--------------------------------------------------------------------------
 */
 

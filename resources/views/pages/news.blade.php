@@ -3,10 +3,14 @@
 @section('content')
 
 <div class="row" id="release">
-    <h1>Latest Release: <a href="{{route('releases.show', $release->slug)}}">{{$release->title}}</a></h1>
+    <h1>Latest Release</h1>
+    <hr>
+    <a href="{{route('releases.show', $release->slug)}}">{{$release->title}}</a>
 </div>
 <div class="row">
-    <img src="{{asset($release->image->path)}}" alt={{$release->title}}>
+    <a href="{{route('releases.show', $release->slug)}}">
+        <img src="{{asset($release->image->path)}}" alt={{$release->title}}>
+    </a>
 </div>
 
 @endsection

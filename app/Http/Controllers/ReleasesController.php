@@ -19,15 +19,9 @@ class ReleasesController extends Controller
      */
     public function index()
     {
-        // create a variable and store all blog releases in it from db
+        $releases = Release::where('category_id', 2)->orderBy('id', 'desc')->paginate(4);
 
-        $releases = Release::orderBy('id', 'desc')->paginate(10);
-
-        // return a view and pass in the variable
-
-        return view('releases.index')->withReleases($releases);
-
-
+        return view('pages.releases')->withReleases($releases);
     }
 
     /**
@@ -162,10 +156,12 @@ class ReleasesController extends Controller
         // redirect
         return redirect()->route('releases.index');
     }
-    public function release($slug)
+    public function releasesIndex()
     {
+        // create a variable and store all blog releases in it from db
+        $releases = Release::orderBy('id', 'desc')->paginate(10);
 
-        $release = Release::where('slug', $slug)->first();
-        return view('blog.release')->withSlug($slug);
+        // return a view and pass in the variable
+        return view('releases.index')->withReleases($releases);
     }
 }
