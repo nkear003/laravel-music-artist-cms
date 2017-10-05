@@ -7,10 +7,10 @@
     <div class="row">
         <div class="col bg-load">
             <a href="{{route('releases.show', $release->slug)}}">
-                <img src="{{asset($release->image->path)}}" alt={{$release->title}}>
+                <img class="bg-load" src="{{asset($release->image->path)}}" alt={{$release->title}}>
             </a>
         </div>
-        <div class="col bg-load">
+        <div class="col">
             @include('releases._soundcloud')
         </div>
     </div>

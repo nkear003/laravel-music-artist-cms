@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('components.release_latest')
+@include('components._releaseLatest')
 
 <div id="divider">
     <div class="col">

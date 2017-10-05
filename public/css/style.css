@@ -37,4 +37,5 @@ ul {
 }
 .form-control { margin-bottom: .5rem; }
 .hide { display: none; }
-.bg-load { background-color: red; }
+/*.bg-load { background-color: red; }*/
+.bg-load { background: url('loader2.gif') no-repeat center; }
