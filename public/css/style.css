@@ -43,7 +43,6 @@ ul {
 img {
   /* You can't do anything here */
 }
-
 .overlay {
   position: relative;
   display: inline-block;
@@ -54,6 +53,6 @@ img {
   top: 0;
   bottom: 0;
   width:100%;
-  background-color: red;
+  background: rgba(0, 0, 0, .6);
 }
 .overlay:hover .overlay-content { display: inline-block; }

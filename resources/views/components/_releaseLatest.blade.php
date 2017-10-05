@@ -11,7 +11,7 @@
                     <img class="img-fluid bg-load" src="{{asset($release->image->path)}}" alt={{$release->title}}>
                 </a>
                 <div class="overlay-content">
-                    Schlagen
+                    <h3 class="text-white text-center align-middle">{{$release->title}}</h3>
                 </div>
             </div>
         </div>
