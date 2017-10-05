@@ -46,23 +46,14 @@ img {
 
 .overlay {
   position: relative;
-  /*margin: 50px;*/
   display: inline-block;
 }
-
 .overlay-content {
   position: absolute;
-  /* This you don't know */
-  /* width: 320px; */
-  /* This you don't know */
-  /* height: 200px; */
   display: none;
   top: 0;
   bottom: 0;
   width:100%;
+  background-color: red;
 }
-
-.overlay:hover .overlay-content {
-    display: inline-block;
-    background-color: red;
-}
+.overlay:hover .overlay-content { display: inline-block; }

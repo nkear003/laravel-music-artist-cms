@@ -10,7 +10,7 @@
                 <a href="{{route('releases.show', $release->slug)}}">
                     <img class="img-fluid bg-load" src="{{asset($release->image->path)}}" alt={{$release->title}}>
                 </a>
-                <div class="overlay-content img-fluid">
+                <div class="overlay-content">
                     Schlagen
                 </div>
             </div>
