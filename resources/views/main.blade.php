@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="container-fluid">
             <div class="row">
-                <div class="offset-1 col-10">
+                <div class="offset-2 col-8">
                     @include('partials._messages')
                     @yield('content')
                 </div>
